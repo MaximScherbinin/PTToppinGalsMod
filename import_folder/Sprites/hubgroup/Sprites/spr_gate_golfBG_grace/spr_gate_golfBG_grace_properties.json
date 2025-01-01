@@ -1,0 +1,25 @@
+{
+  "Name": "spr_gate_golfBG_grace",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 5.0,
+  "PlaybackType": 1,
+  "Height": 256,
+  "Width": 192,
+  "Origin": [
+    96,
+    256
+  ],
+  "Margin": [
+    0,
+    191,
+    255,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

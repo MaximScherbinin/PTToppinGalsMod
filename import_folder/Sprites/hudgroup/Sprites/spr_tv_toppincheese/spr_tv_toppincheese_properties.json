@@ -1,0 +1,25 @@
+{
+  "Name": "spr_tv_toppincheese",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 1.0,
+  "PlaybackType": 1,
+  "Height": 268,
+  "Width": 278,
+  "Origin": [
+    139,
+    134
+  ],
+  "Margin": [
+    38,
+    245,
+    210,
+    38
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

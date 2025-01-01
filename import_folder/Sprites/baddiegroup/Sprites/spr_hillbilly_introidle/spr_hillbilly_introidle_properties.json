@@ -1,0 +1,25 @@
+{
+  "Name": "spr_hillbilly_introidle",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 1.0,
+  "PlaybackType": 1,
+  "Height": 222,
+  "Width": 194,
+  "Origin": [
+    97,
+    162
+  ],
+  "Margin": [
+    54,
+    154,
+    207,
+    136
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

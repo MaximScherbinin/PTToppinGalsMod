@@ -1,0 +1,25 @@
+{
+  "Name": "spr_tile_beach_graceball",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 30.0,
+  "PlaybackType": 0,
+  "Height": 54,
+  "Width": 60,
+  "Origin": [
+    0,
+    0
+  ],
+  "Margin": [
+    0,
+    59,
+    53,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

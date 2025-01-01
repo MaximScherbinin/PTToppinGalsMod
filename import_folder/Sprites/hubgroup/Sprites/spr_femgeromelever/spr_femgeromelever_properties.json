@@ -1,0 +1,25 @@
+{
+  "Name": "spr_femgeromelever",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 1.0,
+  "PlaybackType": 1,
+  "Height": 70,
+  "Width": 104,
+  "Origin": [
+    64,
+    24
+  ],
+  "Margin": [
+    0,
+    103,
+    69,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

@@ -1,0 +1,25 @@
+{
+  "Name": "bg_golfballoon_grace",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 10.0,
+  "PlaybackType": 0,
+  "Height": 815,
+  "Width": 1275,
+  "Origin": [
+    0,
+    0
+  ],
+  "Margin": [
+    0,
+    1274,
+    814,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

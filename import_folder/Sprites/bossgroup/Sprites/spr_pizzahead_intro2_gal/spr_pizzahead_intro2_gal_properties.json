@@ -1,0 +1,25 @@
+{
+  "Name": "spr_pizzahead_intro2_gal",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 1.0,
+  "PlaybackType": 1,
+  "Height": 181,
+  "Width": 301,
+  "Origin": [
+    194,
+    88
+  ],
+  "Margin": [
+    0,
+    300,
+    180,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

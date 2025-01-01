@@ -1,0 +1,25 @@
+{
+  "Name": "spr_titlecards",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 1.0,
+  "PlaybackType": 1,
+  "Height": 540,
+  "Width": 960,
+  "Origin": [
+    0,
+    0
+  ],
+  "Margin": [
+    0,
+    959,
+    539,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

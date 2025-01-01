@@ -1,0 +1,25 @@
+{
+  "Name": "Bg_freezerfridge_grace",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 20.0,
+  "PlaybackType": 0,
+  "Height": 800,
+  "Width": 1000,
+  "Origin": [
+    0,
+    0
+  ],
+  "Margin": [
+    0,
+    999,
+    799,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

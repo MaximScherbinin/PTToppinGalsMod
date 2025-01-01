@@ -1,0 +1,11 @@
+state = (0 << 0)
+sprite_index = (global.mod_graceball ? spr_pizzaball_golfhit_grace : spr_pizzaball_golfhit)
+x = 156
+y = obj_screensizer.actual_height + sprite_height
+primoburg = -4
+hit = 0
+hand_state = (135 << 0)
+hand_yoffset = 200
+hand_shake = 5
+hand_buffer = 0
+cloud_index = 0

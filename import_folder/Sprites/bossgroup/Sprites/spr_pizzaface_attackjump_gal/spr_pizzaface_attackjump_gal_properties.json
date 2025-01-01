@@ -1,0 +1,25 @@
+{
+  "Name": "spr_pizzaface_attackjump_gal",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 1.0,
+  "PlaybackType": 1,
+  "Height": 195,
+  "Width": 210,
+  "Origin": [
+    105,
+    97
+  ],
+  "Margin": [
+    0,
+    209,
+    194,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

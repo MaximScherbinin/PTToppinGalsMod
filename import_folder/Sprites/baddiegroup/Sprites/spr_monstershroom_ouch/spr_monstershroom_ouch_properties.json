@@ -1,0 +1,25 @@
+{
+  "Name": "spr_monstershroom_ouch",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 20.0,
+  "PlaybackType": 0,
+  "Height": 222,
+  "Width": 194,
+  "Origin": [
+    0,
+    0
+  ],
+  "Margin": [
+    21,
+    178,
+    207,
+    97
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

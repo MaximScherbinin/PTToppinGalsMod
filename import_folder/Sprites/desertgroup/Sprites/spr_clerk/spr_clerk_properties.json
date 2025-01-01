@@ -1,0 +1,25 @@
+{
+  "Name": "spr_clerk",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 30.0,
+  "PlaybackType": 0,
+  "Height": 119,
+  "Width": 91,
+  "Origin": [
+    45,
+    59
+  ],
+  "Margin": [
+    6,
+    71,
+    84,
+    20
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

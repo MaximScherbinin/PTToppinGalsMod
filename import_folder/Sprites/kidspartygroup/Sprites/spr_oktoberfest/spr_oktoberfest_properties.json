@@ -1,0 +1,25 @@
+{
+  "Name": "spr_oktoberfest",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 1.0,
+  "PlaybackType": 1,
+  "Height": 540,
+  "Width": 960,
+  "Origin": [
+    0,
+    0
+  ],
+  "Margin": [
+    23,
+    925,
+    539,
+    13
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

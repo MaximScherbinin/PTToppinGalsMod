@@ -1,0 +1,25 @@
+{
+  "Name": "spr_achievement_badland",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 10.0,
+  "PlaybackType": 1,
+  "Height": 100,
+  "Width": 100,
+  "Origin": [
+    50,
+    50
+  ],
+  "Margin": [
+    16,
+    79,
+    79,
+    16
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

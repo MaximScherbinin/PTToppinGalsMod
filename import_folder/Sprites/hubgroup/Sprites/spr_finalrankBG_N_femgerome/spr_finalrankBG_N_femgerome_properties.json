@@ -1,0 +1,25 @@
+{
+  "Name": "spr_finalrankBG_N_femgerome",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 10.0,
+  "PlaybackType": 0,
+  "Height": 200,
+  "Width": 200,
+  "Origin": [
+    100,
+    100
+  ],
+  "Margin": [
+    0,
+    199,
+    199,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

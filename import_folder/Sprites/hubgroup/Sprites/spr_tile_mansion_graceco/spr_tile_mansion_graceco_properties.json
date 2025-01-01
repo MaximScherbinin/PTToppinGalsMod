@@ -1,0 +1,25 @@
+{
+  "Name": "spr_tile_mansion_graceco",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 30.0,
+  "PlaybackType": 0,
+  "Height": 197,
+  "Width": 261,
+  "Origin": [
+    0,
+    0
+  ],
+  "Margin": [
+    0,
+    260,
+    196,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

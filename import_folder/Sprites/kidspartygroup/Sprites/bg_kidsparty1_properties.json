@@ -1,0 +1,25 @@
+{
+  "Name": "bg_kidsparty1",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 0.35,
+  "PlaybackType": 1,
+  "Height": 661,
+  "Width": 1027,
+  "Origin": [
+    0,
+    0
+  ],
+  "Margin": [
+    0,
+    1026,
+    660,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

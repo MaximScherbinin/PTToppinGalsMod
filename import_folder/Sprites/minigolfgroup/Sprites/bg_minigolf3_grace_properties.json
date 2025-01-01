@@ -1,0 +1,25 @@
+{
+  "Name": "bg_minigolf3_grace",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 15.0,
+  "PlaybackType": 0,
+  "Height": 540,
+  "Width": 1100,
+  "Origin": [
+    0,
+    0
+  ],
+  "Margin": [
+    0,
+    1099,
+    539,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

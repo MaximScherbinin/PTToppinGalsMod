@@ -1,0 +1,25 @@
+{
+  "Name": "bg_golfclouds_grace",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 30.0,
+  "PlaybackType": 0,
+  "Height": 660,
+  "Width": 1275,
+  "Origin": [
+    0,
+    0
+  ],
+  "Margin": [
+    0,
+    1274,
+    659,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

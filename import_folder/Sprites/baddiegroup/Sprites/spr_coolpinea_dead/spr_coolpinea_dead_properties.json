@@ -1,0 +1,25 @@
+{
+  "Name": "spr_coolpinea_dead",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 1.0,
+  "PlaybackType": 1,
+  "Height": 110,
+  "Width": 100,
+  "Origin": [
+    50,
+    85
+  ],
+  "Margin": [
+    3,
+    93,
+    96,
+    15
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

@@ -1,0 +1,25 @@
+{
+  "Name": "spr_ptgroom_paintings",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 30.0,
+  "PlaybackType": 0,
+  "Height": 704,
+  "Width": 1216,
+  "Origin": [
+    0,
+    0
+  ],
+  "Margin": [
+    0,
+    1215,
+    703,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

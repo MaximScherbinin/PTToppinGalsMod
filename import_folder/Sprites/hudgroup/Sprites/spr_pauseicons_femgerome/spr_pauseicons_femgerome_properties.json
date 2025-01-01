@@ -1,0 +1,25 @@
+{
+  "Name": "spr_pauseicons_femgerome",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 10.0,
+  "PlaybackType": 1,
+  "Height": 83,
+  "Width": 109,
+  "Origin": [
+    54,
+    46
+  ],
+  "Margin": [
+    0,
+    100,
+    77,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

@@ -1,0 +1,25 @@
+{
+  "Name": "spr_pizzaball_rank2_grace",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 1.0,
+  "PlaybackType": 1,
+  "Height": 347,
+  "Width": 548,
+  "Origin": [
+    274,
+    173
+  ],
+  "Margin": [
+    0,
+    547,
+    346,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

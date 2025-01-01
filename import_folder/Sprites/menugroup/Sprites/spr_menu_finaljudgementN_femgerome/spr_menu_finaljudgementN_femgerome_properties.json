@@ -1,0 +1,25 @@
+{
+  "Name": "spr_menu_finaljudgementN_femgerome",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 10.0,
+  "PlaybackType": 0,
+  "Height": 60,
+  "Width": 161,
+  "Origin": [
+    74,
+    30
+  ],
+  "Margin": [
+    5,
+    145,
+    58,
+    19
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

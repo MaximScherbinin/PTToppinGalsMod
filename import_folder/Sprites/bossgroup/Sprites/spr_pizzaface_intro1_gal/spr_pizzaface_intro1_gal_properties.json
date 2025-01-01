@@ -1,0 +1,25 @@
+{
+  "Name": "spr_pizzaface_intro1_gal",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 1.0,
+  "PlaybackType": 1,
+  "Height": 178,
+  "Width": 210,
+  "Origin": [
+    105,
+    89
+  ],
+  "Margin": [
+    0,
+    209,
+    177,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

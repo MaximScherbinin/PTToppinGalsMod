@@ -1,0 +1,25 @@
+{
+  "Name": "spr_monsteralert",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 1.0,
+  "PlaybackType": 1,
+  "Height": 69,
+  "Width": 89,
+  "Origin": [
+    44,
+    34
+  ],
+  "Margin": [
+    0,
+    88,
+    68,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

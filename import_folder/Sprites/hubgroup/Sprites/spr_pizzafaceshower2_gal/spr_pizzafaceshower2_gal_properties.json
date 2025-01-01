@@ -1,0 +1,25 @@
+{
+  "Name": "spr_pizzafaceshower2_gal",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 1.0,
+  "PlaybackType": 1,
+  "Height": 282,
+  "Width": 260,
+  "Origin": [
+    130,
+    141
+  ],
+  "Margin": [
+    0,
+    259,
+    281,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}

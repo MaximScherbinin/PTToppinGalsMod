@@ -1,0 +1,25 @@
+{
+  "Name": "spr_johnresurrected_femgerome3",
+  "CMask": false,
+  "BBMode": 0,
+  "PlaybackSpeed": 1.0,
+  "PlaybackType": 1,
+  "Height": 189,
+  "Width": 212,
+  "Origin": [
+    106,
+    94
+  ],
+  "Margin": [
+    0,
+    211,
+    188,
+    0
+  ],
+  "isSpecial": true,
+  "SpecialVersion": 3,
+  "Transparent": false,
+  "SMaskType": 0,
+  "isSmooth": false,
+  "isPreload": false
+}
