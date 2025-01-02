@@ -1,5 +1,7 @@
 # PTToppinGalsMod
  Source code for Minus8 Toppins Replacement Mod, a PC game mod for Pizza Tower (2023)
+ 
+ Download: https://gamebanana.com/mods/437536
 
 # Importing
 In-depth guide coming soon
