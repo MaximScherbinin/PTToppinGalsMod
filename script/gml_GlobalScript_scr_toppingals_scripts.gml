@@ -1,4 +1,4 @@
-scr_tg_vars_init() {
+function scr_tg_vars_init() {
 	var _Nfinished = 0
 	var data_arr = [(get_save_folder() + "/saveData1"), (get_save_folder() + "/saveData2"), (get_save_folder() + "/saveData3")]
 	for (var i = 0; i < array_length(data_arr); i++)
