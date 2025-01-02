@@ -2,13 +2,21 @@ if (!variable_global_exists("mod_graceball"))
     return;
 if (!variable_global_exists("mod_femgerome"))
     return;
-if (room == tower_finalhallway || room == Mainmenu)
+if (room == Mainmenu)
 {
-	global.exit_toppin_shroom = 0
-	global.exit_toppin_cheese = 0
-	global.exit_toppin_tomato = 0
-	global.exit_toppin_sausage = 0
-	global.exit_toppin_pineapple = 0
+    global.exit_toppin_shroom = 0
+    global.exit_toppin_cheese = 0
+    global.exit_toppin_tomato = 0
+    global.exit_toppin_sausage = 0
+    global.exit_toppin_pineapple = 0
+}
+if (room == tower_finalhallway)
+{
+    global.exit_toppin_shroom = 0
+    global.exit_toppin_cheese = 0
+    global.exit_toppin_tomato = 0
+    global.exit_toppin_sausage = 0
+    global.exit_toppin_pineapple = 0
 }
 if (room == tower_entrancehall && global.panic) {
 	var lay_id = layer_get_id("Assets_1")
