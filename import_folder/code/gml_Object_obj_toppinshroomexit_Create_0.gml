@@ -7,3 +7,4 @@ use_palette = 1
 paletteselect = 1
 spr_palette = spr_shroompalette
 palettetexture = -4
+is_toppingal = true

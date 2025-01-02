@@ -26,7 +26,7 @@ if (currentselect != -1)
 }
 if (tex != -4)
     pattern_set(global.Base_Pattern_Color, sprite_index, image_index, image_xscale, image_yscale, tex)
-pal_swap_set(spr_peppalette, pal, 0)
+pal_swap_set(spr_peppalette, pal, false)
 if (!pep_debris)
     draw_sprite_ext(sprite_index, image_index, _x, _y, image_xscale, image_yscale, image_angle, image_blend, image_alpha)
 if (tex != -4)
@@ -35,8 +35,6 @@ shader_reset()
 draw_set_alpha(extrauialpha)
 var qx = 0
 var qy = 0
-lang_draw_sprite(spr_quitgame, 0, qx, qy)
-scr_draw_text_arr((qx + 50), (qy + 100), grab_key)
 draw_set_font(lang_get_font("bigfont"))
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
@@ -104,7 +102,7 @@ for (i = 0; i < array_length(games); i++)
             var spr = spr_menu_finaljudgement
             if (i == 1)
                 spr = (global.mod_femgerome == 1 ? spr_menu_finaljudgementN_femgerome : spr_menu_finaljudgementN)
-            draw_sprite_ext(spr, _i, percentstate_x, (percentstate_y + 50), 1, 1, 0, c_white, game.alpha)
+            lang_draw_sprite_ext(spr, _i, percentstate_x, (percentstate_y + 50), 1, 1, 0, 16777215, game.alpha)
         }
     }
 }

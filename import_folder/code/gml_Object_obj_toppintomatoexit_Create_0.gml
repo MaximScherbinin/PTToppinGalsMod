@@ -7,3 +7,4 @@ use_palette = 0
 paletteselect = 1
 spr_palette = spr_tomatopalette
 palettetexture = -4
+is_toppingal = true
