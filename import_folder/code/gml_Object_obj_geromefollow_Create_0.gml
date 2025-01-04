@@ -1,6 +1,7 @@
 event_inherited()
 sprite_index = (global.mod_femgerome == 1 ? spr_femgerome_collected : spr_gerome_collected)
 image_speed = 0.35
+xoffset = 40
 yoffset = 0
 do_end = 0
 hsp = 0
