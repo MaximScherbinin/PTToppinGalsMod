@@ -1,7 +1,7 @@
 targetRoom = minigolf_1
 level = "minigolf"
 sprite_index = spr_gate_golf
-bgsprite = (global.mod_graceball ? spr_gate_golfBG_grace : spr_gate_golfBG)
+bgsprite = global.mod_graceball ? spr_gate_golfBG_grace : spr_gate_golfBG
 title_index = 1
 title_sprite = spr_titlecards_title2
 titlecard_index = 11

@@ -1,9 +1,11 @@
 with (obj_player)
-    state = (18 << 0)
+    state = states.titlescreen
+
 if (scene >= 0)
 {
     scr_menu_getinput()
-    if ((!showtext) && (key_jump || key_start))
+    
+    if (!showtext && (key_jump || key_start))
     {
         showtext = 1
         alarm[0] = 120
@@ -11,39 +13,47 @@ if (scene >= 0)
     else if (showtext && (key_jump || key_start))
     {
         room_goto(Mainmenu)
-        return;
+        exit
     }
 }
+
 var _switch = 0
+
 if (scenebuffer > 0)
     scenebuffer--
 else
     _switch = 1
-switch scene
+
+switch (scene)
 {
     case -2:
-        if (_switch && (!instance_exists(obj_logoprop)))
+        if (_switch && !instance_exists(obj_logoprop))
         {
             scene++
-            with (instance_create((room_width / 2), (room_height / 2), obj_logoprop))
+            
+            with (instance_create(room_width / 2, room_height / 2, obj_logoprop))
             {
                 sprite_index = spr_intro_fmod
                 image_xscale = 0.5
                 image_yscale = image_xscale
             }
         }
+        
         break
+    
     case -1:
-        if (_switch && (!instance_exists(obj_logoprop)))
+        if (_switch && !instance_exists(obj_logoprop))
         {
             scenebuffer = 340
             scenebuffer += 20
             scene++
+            
             with (instance_create(0, 0, obj_genericfade))
             {
                 fade = 1.2
                 deccel = 0.03
             }
+            
             peppinopizza = instance_create(-100, 0, obj_introprop)
             peppinopizza.sprite_index = spr_introasset1
             peppinopizza.depth = 0
@@ -59,19 +69,23 @@ switch scene
             bg = instance_create(0, 0, obj_introprop)
             bg.sprite_index = spr_introasset5
             bg.depth = 4
+            
             with (obj_music)
             {
-                if (music != noone)
+                if (music != -4)
                     fmod_event_instance_set_parameter(music.event, "state", 1, 1)
             }
         }
+        
         break
+    
     case 0:
         peppinopizza.x += 0.25
         tower.x -= 0.15
         moon.x += 0.08
         clouds.x += 0.1
-        if _switch
+        
+        if (_switch)
         {
             instance_destroy(obj_introprop)
             peppino = instance_create(-70, 0, obj_introprop)
@@ -81,10 +95,13 @@ switch scene
             scenebuffer += 30
             scene++
         }
+        
         break
+    
     case 1:
         peppino.x += 0.2
-        if _switch
+        
+        if (_switch)
         {
             instance_destroy(obj_introprop)
             peppino = instance_create(0, 0, obj_introprop)
@@ -102,9 +119,11 @@ switch scene
             scenebuffer = 185
             scene++
         }
+        
         break
+    
     case 2:
-        if _switch
+        if (_switch)
         {
             scenebuffer = 115
             instance_destroy(obj_introprop)
@@ -125,11 +144,14 @@ switch scene
             bg2.depth = 5
             scene++
         }
+        
         break
+    
     case 3:
         bg1.x = lerp(bg1.x, -200, 0.04)
         bg2.x = lerp(bg2.x, 200, 0.04)
-        if _switch
+        
+        if (_switch)
         {
             instance_destroy(obj_introprop)
             pizzaface = instance_create(0, 400, obj_introprop)
@@ -140,9 +162,12 @@ switch scene
             bg.depth = 4
             scene++
         }
+        
         break
+    
     case 4:
         pizzaface.y = lerp(pizzaface.y, 0, 0.04)
+        
         if (_switch && floor(pizzaface.y) <= 1)
         {
             scenebuffer = 130
@@ -155,9 +180,11 @@ switch scene
             bg.depth = 4
             scene++
         }
+        
         break
+    
     case 5:
-        if _switch
+        if (_switch)
         {
             scenebuffer = 120
             instance_destroy(obj_introprop)
@@ -169,9 +196,11 @@ switch scene
             bg.depth = 4
             scene++
         }
+        
         break
+    
     case 6:
-        if _switch
+        if (_switch)
         {
             scenebuffer = 190
             scene++
@@ -189,9 +218,11 @@ switch scene
             bg1.hspeed = 1
             bg1.vspeed = -1
         }
+        
         break
+    
     case 7:
-        if _switch
+        if (_switch)
         {
             instance_destroy(bg)
             instance_destroy(bg1)
@@ -207,9 +238,11 @@ switch scene
             bg.sprite_index = spr_intro_plot2BG
             bg.vspeed = -0.2
         }
+        
         break
+    
     case 8:
-        if _switch
+        if (_switch)
         {
             scenebuffer = 120
             scene++
@@ -219,13 +252,17 @@ switch scene
             bg.sprite_index = spr_intro_plot3BG
             bg.vspeed = -6
         }
+        
         break
+    
     case 9:
         peppinopizza.x = irandom_range(-1, 1)
         peppinopizza.y = irandom_range(-1, 1)
-        if _switch
+        
+        if (_switch)
         {
             scene++
+            
             with (instance_create(0, 0, obj_genericfade))
             {
                 fade = 0
@@ -235,9 +272,11 @@ switch scene
                 color = c_white
             }
         }
+        
         break
+    
     case 10:
-        if (_switch && (!obj_genericfade.fadein))
+        if (_switch && !obj_genericfade.fadein)
         {
             instance_destroy(obj_introprop)
             peppino = instance_create(-130, 386, obj_playerprop)
@@ -262,12 +301,15 @@ switch scene
             layer_set_visible("Backgrounds_5", 1)
             layer_set_visible("Backgrounds_6", 1)
         }
+        
         break
+    
     case 11:
         peppino.x += 1.5
         pizzaface.x += 2.5
-        pizzaface.y = Wave((pizzaface.ystart - 30), (pizzaface.ystart + 30), 3, 10)
-        if _switch
+        pizzaface.y = Wave(pizzaface.ystart - 30, pizzaface.ystart + 30, 3, 10)
+        
+        if (_switch)
         {
             scene++
             scenebuffer = 180
@@ -284,13 +326,16 @@ switch scene
             bg2.vspeed = 1
             bg2.depth = -13
         }
+        
         break
+    
     case 12:
         peppino.x = Approach(peppino.x, 0, 3)
         peppino.y = Approach(peppino.y, 0, 5)
         bg.x -= 0.2
         bg.y += 0.1
-        if _switch
+        
+        if (_switch)
         {
             scene++
             scenebuffer = 60
@@ -304,12 +349,15 @@ switch scene
             pizzaface.sprite_index = global.mod_spr_pizzaface
             pizzaface.image_speed = 0.35
         }
+        
         break
+    
     case 13:
         peppino.x += 1
         pizzaface.x += 2
-        pizzaface.y = Wave((pizzaface.ystart - 30), (pizzaface.ystart + 30), 3, 10)
-        if _switch
+        pizzaface.y = Wave(pizzaface.ystart - 30, pizzaface.ystart + 30, 3, 10)
+        
+        if (_switch)
         {
             peppino.sprite_index = spr_player_mach4
             peppino.fake_hsp = 12
@@ -322,13 +370,16 @@ switch scene
             slime2.sprite_index = spr_slime_intro
             slime2.image_speed = 0.35
         }
+        
         break
+    
     case 14:
         peppino.x += 3
         pizzaface.x += 5
-        pizzaface.y = Wave((pizzaface.ystart - 30), (pizzaface.ystart + 30), 3, 10)
+        pizzaface.y = Wave(pizzaface.ystart - 30, pizzaface.ystart + 30, 3, 10)
         slime1.x -= abs(layer_get_hspeed("Backgrounds_6"))
         slime2.x -= abs(layer_get_hspeed("Backgrounds_6"))
+        
         if (peppino.x >= (slime1.x - 40))
         {
             scene++
@@ -351,6 +402,7 @@ switch scene
             bg2.hspeed = -1
             bg2.vspeed = 1
             bg2.depth = -13
+            
             with (instance_create(0, 0, obj_genericfade))
             {
                 fade = 1.5
@@ -360,11 +412,14 @@ switch scene
                 color = c_white
             }
         }
+        
         break
+    
     case 15:
         bg.x -= 0.2
         bg.y += 0.1
-        if _switch
+        
+        if (_switch)
         {
             instance_destroy(obj_introprop)
             layer_x("Backgrounds_4", 0)
@@ -374,11 +429,14 @@ switch scene
             scenebuffer = 100
             scene++
         }
+        
         break
+    
     case 16:
         if (floor(peppino.image_index) == (peppino.image_number - 1))
             peppino.image_index = peppino.image_number - 1
-        if _switch
+        
+        if (_switch)
         {
             gustavo = instance_create(0, 300, obj_introprop)
             gustavo.sprite_index = spr_intro_styleshot2
@@ -386,12 +444,16 @@ switch scene
             scenebuffer = 100
             scene++
         }
+        
         break
+    
     case 17:
         if (floor(peppino.image_index) == (peppino.image_number - 1))
             peppino.image_index = peppino.image_number - 1
+        
         gustavo.y = lerp(gustavo.y, 0, 0.3)
-        if _switch
+        
+        if (_switch)
         {
             instance_destroy(obj_introprop)
             layer_x("Backgrounds_4", 0)
@@ -402,24 +464,27 @@ switch scene
             pizzaface = instance_create(-700, 200, obj_introprop)
             pizzaface.sprite_index = global.mod_spr_pizzaface
             pizzaface.image_speed = 0.35
-            gustavo = instance_create((room_width / 2), 386, obj_playerprop)
+            gustavo = instance_create(room_width / 2, 386, obj_playerprop)
             gustavo.spr_palette = spr_ratmountpalette
             gustavo.sprite_index = spr_intro_gustavomap
-            stick = instance_create((room_width * 0.55), 200, obj_introprop)
+            stick = instance_create(room_width * 0.55, 200, obj_introprop)
             stick.sprite_index = spr_intro_stick1
             stick.image_speed = 0.35
             scene++
         }
+        
         break
+    
     case 18:
         peppino.x += 14
         pizzaface.x += 20
-        pizzaface.y = Wave((pizzaface.ystart - 30), (pizzaface.ystart + 30), 3, 10)
+        pizzaface.y = Wave(pizzaface.ystart - 30, pizzaface.ystart + 30, 3, 10)
+        
         if (gustavo.sprite_index == spr_intro_gustavomap)
         {
             if (peppino.x >= (gustavo.x - 25))
             {
-                instance_create((peppino.x + 16), peppino.y, obj_bangeffect)
+                instance_create(peppino.x + 16, peppino.y, obj_bangeffect)
                 gustavo.sprite_index = spr_lonegustavo_hurt
                 gustavo.hsp = 8
                 gustavo.vsp = -11
@@ -431,17 +496,20 @@ switch scene
             {
                 x += hsp
                 y += vsp
+                
                 if (vsp < 20)
                     vsp += 0.5
             }
         }
+        
         if (stick.sprite_index == spr_intro_stick1)
         {
             stick.x += 2
-            stick.y = Wave((stick.ystart - 10), (stick.ystart + 10), 1, 5)
+            stick.y = Wave(stick.ystart - 10, stick.ystart + 10, 1, 5)
+            
             if (pizzaface.x >= (stick.x - 25))
             {
-                instance_create((pizzaface.x + 16), pizzaface.y, obj_bangeffect)
+                instance_create(pizzaface.x + 16, pizzaface.y, obj_bangeffect)
                 stick.sprite_index = spr_intro_stick2
                 stick.hsp = 8
                 stick.vsp = -11
@@ -453,13 +521,16 @@ switch scene
             {
                 x += hsp
                 y += vsp
+                
                 if (vsp < 20)
                     vsp += 0.5
             }
         }
+        
         if (peppino.x > (room_width + 200) && gustavo.y > (room_height + 300))
         {
             scene++
+            
             with (instance_create(0, 0, obj_genericfade))
             {
                 fade = 0
@@ -469,9 +540,11 @@ switch scene
                 color = c_white
             }
         }
+        
         break
+    
     case 19:
-        if (_switch && (!obj_genericfade.fadein))
+        if (_switch && !obj_genericfade.fadein)
         {
             instance_destroy(obj_introprop)
             scene++
@@ -495,9 +568,11 @@ switch scene
             layer_set_visible("Backgrounds_5", 0)
             layer_set_visible("Backgrounds_6", 0)
         }
+        
         break
+    
     case 20:
-        if _switch
+        if (_switch)
         {
             instance_destroy(obj_introprop)
             scene++
@@ -511,9 +586,11 @@ switch scene
             bg.depth = 4
             bg.hspeed = 0.6
         }
+        
         break
+    
     case 21:
-        if _switch
+        if (_switch)
         {
             instance_destroy(obj_introprop)
             scene++
@@ -523,15 +600,18 @@ switch scene
             boss = instance_create(0, -540, obj_introprop)
             boss.sprite_index = spr_intro_pepperman
         }
+        
         break
+    
     case 22:
         boss.y = Approach(boss.y, 0, 25)
+        
         if (_switch && boss.y == 0)
         {
             if (array_length(bossarr) > 0)
             {
                 scenebuffer = 40
-                boss = instance_create(0, (540 * bossdir), obj_introprop)
+                boss = instance_create(0, 540 * bossdir, obj_introprop)
                 bossdir *= -1
                 boss.sprite_index = array_pop(bossarr)
             }
@@ -541,9 +621,11 @@ switch scene
                 scenebuffer = 150
             }
         }
+        
         break
+    
     case 23:
-        if _switch
+        if (_switch)
         {
             instance_destroy(obj_introprop)
             peppino = instance_create(0, 0, obj_introprop)
@@ -553,7 +635,9 @@ switch scene
             bg.vspeed = 3
             scene++
         }
+        
         break
+    
     case 24:
         if (floor(peppino.image_index) == (peppino.image_number - 1))
         {
@@ -568,27 +652,36 @@ switch scene
             scene++
             scenebuffer = 100
         }
+        
         break
+    
     case 25:
-        title.x = title.xstart + (irandom_range((-title.shake_mag), title.shake_mag))
-        title.y = title.ystart + (irandom_range((-title.shake_mag), title.shake_mag))
+        title.x = title.xstart + irandom_range(-title.shake_mag, title.shake_mag)
+        title.y = title.ystart + irandom_range(-title.shake_mag, title.shake_mag)
+        
         if (title.shake_mag > 0)
             title.shake_mag -= 0.1
-        if _switch
+        
+        if (_switch)
             scene++
+        
         break
+    
     case 26:
         title.x = title.xstart
         title.y = title.ystart
         title.image_alpha = Approach(title.image_alpha, 0, 0.05)
+        
         if (title.image_alpha <= 0)
         {
             scene++
             scenebuffer = 80
         }
+        
         break
+    
     case 27:
-        if _switch
+        if (_switch)
         {
             with (instance_create(0, 0, obj_genericfade))
             {
@@ -597,8 +690,320 @@ switch scene
                 deccel = 0.1
                 color = c_white
             }
+            
             room_goto(Mainmenu)
         }
+        
         break
 }
 
+enum states
+{
+    normal,
+    revolver,
+    dynamite,
+    boots,
+    grabbed,
+    tumble,
+    finishingblow,
+    ejected,
+    transitioncutscene,
+    fireass,
+    firemouth,
+    mort,
+    mortjump,
+    mortattack,
+    morthook,
+    hook,
+    ghost,
+    ghostpossess,
+    titlescreen,
+    hookshot,
+    tacklecharge,
+    cheeseball,
+    cheeseballclimbwall,
+    slap,
+    cheesepep,
+    cheesepepstick,
+    cheesepepjump,
+    cheesepepfling,
+    cheesepeplaunch,
+    cheesepepstickside,
+    cheesepepstickup,
+    rideweenie,
+    motorcycle,
+    boxxedpep,
+    boxxedpepspin,
+    boxxedpepjump,
+    pistolaim,
+    climbwall,
+    knightpepslopes,
+    portal,
+    secondjump,
+    chainsawbump,
+    handstandjump,
+    lungeattack,
+    lungegrab,
+    dashtumble,
+    gottreasure,
+    knightpep,
+    knightpepattack,
+    knightpepbump,
+    meteorpep,
+    bombpep,
+    bombgrab,
+    bombpepside,
+    bombpepup,
+    grabbing,
+    chainsawpogo,
+    shotgunjump,
+    pogo,
+    stunned,
+    highjump,
+    chainsaw,
+    facestomp,
+    unknown63,
+    timesup,
+    machroll,
+    shotgun,
+    shotguncrouch,
+    shotguncrouchjump,
+    shotgunshoot,
+    shotgundash,
+    shotgunfreefall,
+    pistol,
+    machfreefall,
+    throwing,
+    slam,
+    superslam,
+    skateboard,
+    grind,
+    grab,
+    punch,
+    backkick,
+    uppunch,
+    shoulder,
+    backbreaker,
+    graffiti,
+    bossdefeat,
+    pizzathrow,
+    bossintro,
+    gameover,
+    keyget,
+    tackle,
+    jump,
+    ladder,
+    slipnslide,
+    comingoutdoor,
+    smirk,
+    Sjump,
+    victory,
+    Sjumpprep,
+    crouch,
+    crouchjump,
+    crouchslide,
+    mach1,
+    mach2,
+    machslide,
+    bump,
+    hurt,
+    freefall,
+    hang,
+    unknown110,
+    freefallland,
+    door,
+    barrel,
+    barreljump,
+    barrelclimbwall,
+    barrelslide,
+    current,
+    boulder,
+    taxi,
+    runonball,
+    mach3,
+    freefallprep,
+    Sjumpland,
+    faceplant,
+    rage,
+    idle,
+    bounce,
+    charge,
+    pizzagoblinthrow,
+    turn,
+    unknown131,
+    unknown132,
+    rolling,
+    walk,
+    fall,
+    land,
+    hit,
+    stun,
+    unknown139,
+    unknown140,
+    chase,
+    arenaspawn,
+    arenaend,
+    arenaintro,
+    arenaround,
+    actor,
+    parry,
+    golf,
+    float,
+    tube,
+    unknown151,
+    taxi2,
+    shoulderbash,
+    pummel,
+    staggered,
+    thrown,
+    supershoulderbash,
+    superattackstart,
+    superattackcharge,
+    superattack,
+    shoulderturn,
+    fistmatch,
+    fistmatchend,
+    groundpunchstart,
+    slipbanan,
+    millionpunch,
+    skateboardturn,
+    bombthrow,
+    bombpogo,
+    jetpackstart,
+    jetpack,
+    jetpackstart2,
+    jetpackspin,
+    mrstick_shield,
+    mrstick_helicopterhat,
+    mrstick_panicjump,
+    mrstick_smokebombstart,
+    mrstick_smokebombcrawl,
+    mrstick_springshoes,
+    mrstick_cardboard,
+    mrstick_cardboardend,
+    mrstick_mockery,
+    bombdelete,
+    rocket,
+    rocketslide,
+    gotoplayer,
+    trickjump,
+    dance,
+    underground,
+    ridecow,
+    ratmount,
+    ratmountjump,
+    ratmountattack,
+    ratmountspit,
+    ratmountclimbwall,
+    ratmounthurt,
+    ratmountgroundpound,
+    ratmountbounce,
+    unknown199,
+    ratmountballoon,
+    ratmounttumble,
+    ratmountgrind,
+    ratmounttrickjump,
+    ratmountskid,
+    ratgrabbed,
+    blockstance,
+    balloon,
+    debugstate,
+    trashstart,
+    trashjump,
+    trashroll,
+    stringfling,
+    stringjump,
+    stringfall,
+    noisejetpack,
+    spiderweb,
+    monsteridle,
+    monsterintro,
+    monsterwalk,
+    monsterchase,
+    monsterinvestigate,
+    monsterrun,
+    flushidle,
+    flushflip,
+    animatronic,
+    moustache,
+    mouth,
+    eyes,
+    nose,
+    ram,
+    phase2transition,
+    look,
+    fishing,
+    unknown234,
+    bombrun,
+    npcthrow,
+    portraitthrow,
+    enguarde,
+    sexypicture,
+    pullinglevel,
+    eat,
+    surprisebox,
+    spinningrun,
+    spin,
+    spinningpunch,
+    groundpunch,
+    bigkick,
+    slamhead,
+    slamhead2,
+    whitenoise,
+    expression,
+    playersuperattack,
+    unknown253,
+    jetpackjump,
+    unknown255,
+    unknown256,
+    bee,
+    beechase,
+    ratmountpunch,
+    ratmountcrouch,
+    ratmountladder,
+    supergrab,
+    unknown263,
+    attract,
+    antigrav,
+    secret,
+    contemplate,
+    mini,
+    reloading,
+    estampede,
+    dropstart,
+    drop,
+    phase1hurt,
+    duel,
+    deformed,
+    grabdash,
+    grabthrow,
+    wait,
+    flamethrower,
+    machinegun,
+    bazooka,
+    crate,
+    noisecrusher,
+    droptrap,
+    noiseskateboard,
+    noiseballooncrash,
+    swinging,
+    stomp,
+    finale,
+    backtohub,
+    ghostcaught,
+    spaceshuttle,
+    animation,
+    pizzaheadjump,
+    fightball,
+    secretportal,
+    teleporter,
+    pizzaheadKO,
+    follow,
+    unknown300,
+    unknown301,
+    unknown302,
+    unknown303,
+    unknown304,
+    machcancelstart,
+    machcancel
+}

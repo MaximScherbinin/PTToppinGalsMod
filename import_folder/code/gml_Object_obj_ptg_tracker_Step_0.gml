@@ -9,18 +9,21 @@ if (room == tower_ptgextrasroom)
     layer_x(lay_id, floor(lay_x))
     layer_y(lay_id, floor(lay_y))
 }
-if variable_global_exists("mod_femgerome")
+
+if (variable_global_exists("mod_femgerome"))
 {
-    if global.mod_femgerome
+    if (global.mod_femgerome)
     {
-        if instance_exists(obj_johnresurrection_gerome)
+        if (instance_exists(obj_johnresurrection_gerome))
         {
             with (obj_johnresurrection_gerome)
             {
                 if (sprite_index == spr_johnresurrected_gerome1)
                     sprite_index = spr_johnresurrected_femgerome1
+                
                 if (sprite_index == spr_johnresurrected_gerome2)
                     sprite_index = spr_johnresurrected_femgerome2
+                
                 if (sprite_index == spr_johnresurrected_gerome3)
                     sprite_index = spr_johnresurrected_femgerome3
             }

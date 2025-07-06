@@ -1,4 +1,4 @@
-pal_swap_init_system(shd_pal_swapper)
+pal_swap_init_system(12)
 global.roommessage = "PTG EXTRAS ROOM"
 global.gameframe_caption_text = "The artwork Pizza Tower Management doesn't want you to see"
 global.leveltorestart = -4
