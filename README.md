@@ -6,7 +6,7 @@
 # Importing
 In-depth guide coming soon
 
-in short, first import sprites using .CSX script included in the repository (you mostly wanna set special value to 3, speed to 1, speed type to frames per game frame, and offset to center), fix sprite offsets as they're not perfect (best you can do is compare to already modded data.win), create new objects:
+in short, first import sprites using ImportGraphicsAdvanced.CSX script in latest UndertaleModTool Bleeding Edge build (you mostly wanna set special value to 3, speed to 1, speed type to frames per game frame, and offset to center), fix sprite offsets as they're not perfect (best you can do is use already modded data.win as reference), create new objects:
 
 obj_ptg_femgerome
 
@@ -32,10 +32,10 @@ obj_toppinshroomexit
 
 obj_toppintomatoexit
 
+You also have to create a new room named "tower_ptgextrasroom", there's no scripts for importing rooms, so you'll have to re-create the room from scratch by using already modded data.win as reference.
+
 then import a script in "script" folder, and import scripts in "code" folder afterwards, all using ImportGML.CSX script.
 
 
 ### Third-party tools used
-ImportGraphicsWithParameters_v2.3 by Donavin Draws on Pizza Tower Mod Database discord server https://discord.com/channels/775746996329775124/775751567629877248/1284016769136328747
-
-UndertaleModTool Community Edition https://github.com/XDOneDude/UndertaleModToolCE
+UndertaleModTool https://github.com/UnderminersTeam/UndertaleModTool
