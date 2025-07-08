@@ -1,4 +1,4 @@
-global.noisejetpack = 0
+global.noisejetpack = false
 if (floor(image_index) == (image_number - 1))
 {
     if (sprite_index == spr_rankNPendstart)
@@ -98,7 +98,7 @@ if brown
     }
     switch toppin_state
     {
-        case (92 << 0):
+        case states.jump:
             if (brownfade < 1)
                 break
             else
@@ -111,34 +111,34 @@ if brown
                 {
                     if (toppin[toppin_index] == 1)
                     {
-                        createmoney[toppin_index] = 1
+                        createmoney[toppin_index] = true
                         if toppinvisible
                             fmod_event_one_shot_3d("event:/sfx/misc/kashing", (room_width / 2), (room_height / 2))
                     }
                     if toppinvisible
                         fmod_event_one_shot_3d("event:/sfx/misc/toppingot", (room_width / 2), (room_height / 2))
                     toppin_y[toppin_index] = yy
-                    toppin_state = (8 << 0)
-                    brown = 1
+                    toppin_state = states.transitioncutscene
+                    brown = true
                 }
                 break
             }
-        case (8 << 0):
+        case states.transitioncutscene:
             toppin_yscale[toppin_index] = Approach(toppin_yscale[toppin_index], 1, 0.1)
             if (toppin_yscale[toppin_index] == 1)
             {
                 toppin_index++
                 if (toppin_index >= array_length(toppin))
                 {
-                    toppin_state = (0 << 0)
+                    toppin_state = states.normal
                     alarm[3] = 40
                 }
                 else
-                    toppin_state = (92 << 0)
+                    toppin_state = states.jump
             }
             break
     }
 
 }
 if instance_exists(obj_treasureviewer)
-    visible = 0
+    visible = false

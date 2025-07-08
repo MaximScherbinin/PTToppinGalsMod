@@ -1,14 +1,14 @@
 switch state
 {
-    case (126 << 0):
+    case states.idle:
         if (start && distance_to_object(obj_player) <= 150)
         {
-            state = (146 << 0)
-            substate = (126 << 0)
+            state = states.actor
+            substate = states.idle
             cutscenebuffer = 120
             with (obj_player)
             {
-                state = (146 << 0)
+                state = states.actor
                 sprite_index = spr_idle
                 movespeed = 0
                 image_speed = 0.35
@@ -19,34 +19,34 @@ switch state
             }
         }
         break
-    case (146 << 0):
+    case states.actor:
         var pizzaface2 = (global.mod_pizzagal == 1 ? spr_pizzafaceshower2_gal : spr_pizzafaceshower2)
         var pizzaface4 = (global.mod_pizzagal == 1 ? spr_pizzafaceshower4_gal : spr_pizzafaceshower4)
         switch substate
         {
-            case (126 << 0):
+            case states.idle:
                 if (cutscenebuffer > 0)
                     cutscenebuffer--
                 else
                 {
                     fmod_event_instance_set_parameter(snd, "state", 1, true)
-                    substate = (0 << 0)
+                    substate = states.normal
                     cutscenebuffer = 100
                     sprite_index = spr_pizzafaceshower3
                 }
                 break
-            case (0 << 0):
+            case states.normal:
                 if (cutscenebuffer > 0)
                     cutscenebuffer--
                 else
                 {
                     fmod_event_instance_set_parameter(snd, "state", 2, true)
-                    substate = (8 << 0)
+                    substate = states.transitioncutscene
                     cutscenebuffer = 100
                     sprite_index = pizzaface2
                 }
                 break
-            case (8 << 0):
+            case states.transitioncutscene:
                 if (cutscenebuffer > 0)
                     cutscenebuffer--
                 else if (sprite_index == pizzaface2)
@@ -62,28 +62,28 @@ switch state
                     x += 13
                     y += 16
                     sprite_index = pizzaface4
-                    substate = (92 << 0)
+                    substate = states.jump
                     movespeed = 15
                     vsp = -4
                     depth = 5
                 }
                 break
-            case (92 << 0):
+            case states.jump:
                 movespeed = Approach(movespeed, 0, 0.2)
                 vsp = Approach(vsp, -15, 0.1)
                 x += movespeed
                 y += vsp
                 if (!(bbox_in_camera(view_camera[0], 50)))
                 {
-                    substate = (89 << 0)
+                    substate = states.gameover
                     with (obj_player)
                     {
-                        state = (0 << 0)
+                        state = states.normal
                         landAnim = false
                     }
                 }
                 break
-            case (89 << 0):
+            case states.gameover:
                 y -= 20
                 if (y < -200)
                 {

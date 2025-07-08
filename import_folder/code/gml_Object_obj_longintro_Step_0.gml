@@ -1,11 +1,11 @@
 with (obj_player)
-    state = (18 << 0)
+    state = states.titlescreen
 if (scene >= 0)
 {
     scr_menu_getinput()
     if ((!showtext) && (key_jump || key_start))
     {
-        showtext = 1
+        showtext = true
         alarm[0] = 120
     }
     else if (showtext && (key_jump || key_start))
@@ -14,11 +14,11 @@ if (scene >= 0)
         return;
     }
 }
-var _switch = 0
+var _switch = false
 if (scenebuffer > 0)
     scenebuffer--
 else
-    _switch = 1
+    _switch = true
 switch scene
 {
     case -2:
@@ -62,7 +62,7 @@ switch scene
             with (obj_music)
             {
                 if (music != noone)
-                    fmod_event_instance_set_parameter(music.event, "state", 1, 1)
+                    fmod_event_instance_set_parameter(music.event, "state", 1, true)
             }
         }
         break
@@ -255,12 +255,12 @@ switch scene
             layer_hspeed("Backgrounds_2", -0.1)
             layer_hspeed("Backgrounds_3", -0.15)
             layer_hspeed("Backgrounds_4", -0.25)
-            layer_set_visible("Backgrounds_1", 1)
-            layer_set_visible("Backgrounds_2", 1)
-            layer_set_visible("Backgrounds_3", 1)
-            layer_set_visible("Backgrounds_4", 1)
-            layer_set_visible("Backgrounds_5", 1)
-            layer_set_visible("Backgrounds_6", 1)
+            layer_set_visible("Backgrounds_1", true)
+            layer_set_visible("Backgrounds_2", true)
+            layer_set_visible("Backgrounds_3", true)
+            layer_set_visible("Backgrounds_4", true)
+            layer_set_visible("Backgrounds_5", true)
+            layer_set_visible("Backgrounds_6", true)
         }
         break
     case 11:
@@ -488,12 +488,12 @@ switch scene
             bg2.sprite_index = spr_animeshot3
             bg2.depth = 5
             bg2.hspeed = 0.6
-            layer_set_visible("Backgrounds_1", 0)
-            layer_set_visible("Backgrounds_2", 0)
-            layer_set_visible("Backgrounds_3", 0)
-            layer_set_visible("Backgrounds_4", 0)
-            layer_set_visible("Backgrounds_5", 0)
-            layer_set_visible("Backgrounds_6", 0)
+            layer_set_visible("Backgrounds_1", false)
+            layer_set_visible("Backgrounds_2", false)
+            layer_set_visible("Backgrounds_3", false)
+            layer_set_visible("Backgrounds_4", false)
+            layer_set_visible("Backgrounds_5", false)
+            layer_set_visible("Backgrounds_6", false)
         }
         break
     case 20:
@@ -592,7 +592,7 @@ switch scene
         {
             with (instance_create(0, 0, obj_genericfade))
             {
-                persistent = 1
+                persistent = true
                 fade = 2
                 deccel = 0.1
                 color = c_white

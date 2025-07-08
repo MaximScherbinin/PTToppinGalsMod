@@ -1,18 +1,18 @@
 switch state
 {
-    case (126 << 0):
+    case states.idle:
         cliff_index = 1
         var tx = obj_screensizer.actual_width - 73
         gerome_x = Approach(gerome_x, tx, 2)
         if (gerome_x == tx)
         {
             alarm[0] = 1
-            state = (92 << 0)
+            state = states.jump
             gerome_spr = (global.mod_femgerome == 1 ? spr_femgeromelever : spr_geromelever)
             gerome_index = 0
         }
         break
-    case (92 << 0):
+    case states.jump:
         cliff_index = 0
         peppino_y = Approach(peppino_y, 0, 1)
         peppino_x = peppino_xstart + (irandom_range(-1, 1))
@@ -25,7 +25,7 @@ switch state
                     targetRoom = other.targetRoom
                     targetDoor = other.targetDoor
                     if check_player_coop()
-                        state = (112 << 0)
+                        state = states.door
                 }
                 instance_create(0, 0, obj_fadeout)
             }

@@ -8,7 +8,7 @@ with (instance_create(0, 0, obj_loadingscreen))
     offload_arr = ["introgroup"]
 }
 with (obj_player)
-    state = (18 << 0)
+    state = states.titlescreen
 global.swapmode = false
 global.leveltorestart = -4
 global.leveltosave = -4

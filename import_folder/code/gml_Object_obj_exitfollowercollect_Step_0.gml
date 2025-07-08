@@ -61,15 +61,15 @@ if (((obj_player1.ispeppino && (!global.swapmode)) || (object_index == obj_gusta
         else if (other.object_index != obj_stickfollower || (!obj_player1.ispeppino))
         {
             yoffset = 0
-            isgustavo = 1
+            isgustavo = true
         }
         if (other.object_index == obj_snottyexit)
-            snotty = 1
+            snotty = true
         else if (other.object_index == obj_gustavofollower || other.object_index == obj_fakepepfollower)
-            isgustavo = 1
+            isgustavo = true
         if other.use_palette
         {
-            use_palette = 1
+            use_palette = true
             paletteselect = other.paletteselect
             spr_palette = other.spr_palette
             palettetexture = other.palettetexture

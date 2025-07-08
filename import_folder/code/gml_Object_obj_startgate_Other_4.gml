@@ -53,7 +53,7 @@ switch targetRoom
 }
 
 if (targetRoom == boss_pepperman || targetRoom == boss_vigilante || targetRoom == boss_noise || targetRoom == boss_fakepep)
-    boss = 1
+    boss = true
 if (object_index != obj_bossdoor)
 {
     var old_y = y

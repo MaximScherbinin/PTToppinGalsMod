@@ -1,4 +1,4 @@
-state = (0 << 0)
+state = states.normal
 sprite_index = (global.mod_graceball ? spr_pizzaball_golfhit_grace : spr_pizzaball_golfhit)
 x = 156
 y = obj_screensizer.actual_height + sprite_height

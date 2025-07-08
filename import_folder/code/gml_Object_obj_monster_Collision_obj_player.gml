@@ -3,13 +3,13 @@ with (obj_secretportal)
     if touched
         return;
 }
-if ((!instance_exists(obj_fadeout)) && state != (217 << 0) && other.state != (146 << 0) && other.state != (61 << 0) && other.state != (137 << 0) && (!other.cutscene) && other.state != (112 << 0) && (!instance_exists(obj_jumpscare)))
+if ((!instance_exists(obj_fadeout)) && state != (217 << 0) && other.state != states.actor && other.state != states.chainsaw && other.state != states.hit && (!other.cutscene) && other.state != states.door && (!instance_exists(obj_jumpscare)))
 {
     if (!global.panic)
     {
         with (obj_player)
         {
-            state = (146 << 0)
+            state = states.actor
             hsp = 0
             vsp = 0
         }
@@ -32,7 +32,7 @@ if ((!instance_exists(obj_fadeout)) && state != (217 << 0) && other.state != (14
         {
             x = xstart
             y = ystart
-            state = (134 << 0)
+            state = states.walk
         }
         x = xstart
         y = ystart

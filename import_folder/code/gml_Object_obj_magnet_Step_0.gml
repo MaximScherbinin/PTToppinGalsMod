@@ -1,7 +1,7 @@
 image_speed = 0.35
 switch state
 {
-    case (0 << 0):
+    case states.normal:
         if (cooldown > 0)
         {
             sprite_index = spr_sirnose_cooldown
@@ -12,7 +12,7 @@ switch state
             sprite_index = spr_sirnose_idle
             with (obj_pizzaball)
             {
-                if (state != (148 << 0) && distance_to_pos(x, y, other.x, other.y, 200, 150))
+                if (state != states.golf && distance_to_pos(x, y, other.x, other.y, 200, 150))
                 {
                     state = (264 << 0)
                     other.state = (264 << 0)
@@ -28,10 +28,10 @@ switch state
         {
             depth = 0
             sprite_index = (global.mod_graceball ? spr_pizzaball_roll_grace : spr_pizzaball_roll)
-            sit = 0
+            sit = false
             x = Approach(x, other.x, 8)
             y = Approach(y, other.y, 8)
-            if (state != (148 << 0))
+            if (state != states.golf)
             {
                 other.hsp = Approach(hsp, 0, 1)
                 other.vsp = Approach(vsp, 0, 1)
@@ -40,9 +40,9 @@ switch state
                 sprite_index = (global.mod_graceball ? spr_pizzaball_stun_grace : spr_pizzaball_stun)
             hsp = other.hsp
             vsp = other.vsp
-            if (state != (264 << 0) && state != (148 << 0))
+            if (state != (264 << 0) && state != states.golf)
             {
-                other.state = (0 << 0)
+                other.state = states.normal
                 other.cooldown = 200
             }
             if (x != other.x || y != other.y)
@@ -70,4 +70,4 @@ if (sprite_index == spr_sirnose_suck)
     }
 }
 else
-    fmod_event_instance_stop(snd, 1)
+    fmod_event_instance_stop(snd, true)

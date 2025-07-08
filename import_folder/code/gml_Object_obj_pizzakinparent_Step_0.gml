@@ -1,8 +1,8 @@
-visible = ((room == rank_room || room == timesuproom) ? 0 : playerid.visible)
-if (obj_player.state == (87 << 0))
-    visible = 0
+visible = ((room == rank_room || room == timesuproom) ? false : playerid.visible)
+if (obj_player.state == states.pizzathrow)
+    visible = false
 playerid = (obj_player1.spotlight ? obj_player1 : obj_player2)
-if (state != (84 << 0))
+if (state != states.backbreaker)
 {
     if (object_index != obj_pizzakinpineapple || (sprite_index != spr_monsterpineapple_smile && sprite_index != spr_monsterpineapple_pose1 && sprite_index != spr_monsterpineapple_pose2 && sprite_index != spr_monsterpineapple_pose3))
     {
@@ -25,7 +25,7 @@ if (state != (84 << 0))
             sprite_index = spr_toppinpineapple
         }
     }
-    if (obj_player1.state == (84 << 0))
+    if (obj_player1.state == states.backbreaker)
     {
         if (object_index == obj_pizzakincheese && random(100) <= 2)
         {
@@ -75,12 +75,12 @@ else
             image_index = 0
         }
     }
-    if (obj_player1.state != (84 << 0) || (sprite_index == spr_intro && floor(image_index) == (image_number - 1)))
+    if (obj_player1.state != states.backbreaker || (sprite_index == spr_intro && floor(image_index) == (image_number - 1)))
     {
         instance_destroy(obj_tinytaunt)
         interp = 0
         sprite_index = spr_idle
-        lock = 0
-        state = (0 << 0)
+        lock = false
+        state = states.normal
     }
 }

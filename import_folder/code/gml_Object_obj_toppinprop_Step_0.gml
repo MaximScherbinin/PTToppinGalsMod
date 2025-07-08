@@ -1,9 +1,9 @@
 mask_index = spr_player_mask
-if (obj_player1.state == (84 << 0) && state != (84 << 0))
+if (obj_player1.state == states.backbreaker && state != states.backbreaker)
 {
     storedstate = state
     storedsprite = sprite_index
-    state = (84 << 0)
+    state = states.backbreaker
     if (idlespr == spr_toppincheese && random(100) <= 2)
     {
         instance_create(x, y, obj_tinytaunt)
@@ -32,7 +32,7 @@ if (obj_player1.state == (84 << 0) && state != (84 << 0))
 }
 switch state
 {
-    case (0 << 0):
+    case states.normal:
         sprite_index = movespr
         hsp = image_xscale * 2
         if scr_solid((x + sign(hsp)), y)
@@ -47,14 +47,14 @@ switch state
         }
         x += hsp
         break
-    case (126 << 0):
+    case states.idle:
         sprite_index = idlespr
         hsp = 0
         break
-    case (84 << 0):
+    case states.backbreaker:
         hsp = 0
         vsp = 0
-        if (obj_player1.state != (84 << 0))
+        if (obj_player1.state != states.backbreaker)
         {
             state = storedstate
             sprite_index = storedsprite

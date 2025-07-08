@@ -1,62 +1,62 @@
 if (room == rm_editor)
     return;
-if (state == (134 << 0) && grounded && vsp > 0 && (obj_player1.state == (111 << 0) || (obj_player1.state == (198 << 0) && obj_player1.sprite_index == spr_playerN_noisecrusherland)) && bbox_in_camera(view_camera[0], 32))
+if (state == states.walk && grounded && vsp > 0 && (obj_player1.state == states.freefallland || (obj_player1.state == states.ratmountbounce && obj_player1.sprite_index == spr_playerN_noisecrusherland)) && bbox_in_camera(view_camera[0], 32))
     scr_pizzaball_go_to_thrown(0, -10)
 arrowindex += 0.35
 switch state
 {
-    case (126 << 0):
+    case states.idle:
         scr_enemy_idle()
         break
-    case (130 << 0):
+    case states.turn:
         scr_enemy_turn()
         break
-    case (134 << 0):
+    case states.walk:
         scr_enemy_walk()
         break
-    case (136 << 0):
+    case states.land:
         scr_enemy_land()
         break
-    case (137 << 0):
+    case states.hit:
         scr_pizzaball_hit()
         break
-    case (148 << 0):
+    case states.golf:
         scr_pizzaball_golf()
         break
-    case (156 << 0):
+    case states.thrown:
         scr_pizzaball_thrown()
         break
-    case (138 << 0):
+    case states.stun:
         scr_enemy_stun()
         if (stunned > 0)
             stunned -= 1
         break
-    case (129 << 0):
+    case states.throw:
         scr_pizzagoblin_throw()
         break
-    case (4 << 0):
+    case states.grabbed:
         scr_pizzaball_grabbed()
         break
-    case (154 << 0):
+    case states.pummel:
         scr_enemy_pummel()
         break
-    case (155 << 0):
+    case states.staggered:
         scr_enemy_staggered()
         break
-    case (125 << 0):
+    case states.rage:
         scr_enemy_rage()
         break
-    case (17 << 0):
+    case states.ghostpossess:
         scr_enemy_ghostpossess()
         break
 }
 
-if (state != (148 << 0))
+if (state != states.golf)
 {
-    shootup = 0
-    arrow = 0
+    shootup = false
+    arrow = false
 }
-if (state == (156 << 0))
+if (state == states.thrown)
 {
     if (blur_effect > 0)
         blur_effect--
@@ -67,62 +67,62 @@ if (state == (156 << 0))
             playerid = other.id
     }
 }
-if ((state == (134 << 0) || state == (126 << 0)) && sit)
+if ((state == states.walk || state == states.idle) && sit)
 {
     hsp = 0
     sprite_index = (global.mod_graceball ? spr_pizzaball_idle1_grace : spr_pizzaball_idle1)
 }
-if (state != (134 << 0))
-    sit = 0
-if (state == (138 << 0) && stunned > 100 && birdcreated == 0)
+if (state != states.walk)
+    sit = false
+if (state == states.stun && stunned > 100 && birdcreated == false)
 {
-    birdcreated = 1
+    birdcreated = true
     with (instance_create(x, y, obj_enemybird))
         ID = other.id
 }
-if (state == (156 << 0) && (!instance_exists(pointerID)))
+if (state == states.thrown && (!instance_exists(pointerID)))
 {
     pointerID = instance_create(x, y, obj_objecticontracker)
     pointerID.sprite_index = (global.mod_graceball ? spr_icon_pizzaball_grace : spr_icon_pizzaball)
     pointerID.objectID = id
 }
-if (state != (138 << 0))
-    birdcreated = 0
-if (flash == 1 && alarm[2] <= 0)
+if (state != states.stun)
+    birdcreated = false
+if (flash == true && alarm[2] <= 0)
     alarm[2] = 0.15 * room_speed
 if (bigcheeseID != noone)
 {
-    if ((!instance_exists(bigcheeseID)) || bigcheeseID.state != (74 << 0) || bigcheeseID.shot)
+    if ((!instance_exists(bigcheeseID)) || bigcheeseID.state != states.throwing || bigcheeseID.shot)
     {
         if (instance_exists(bigcheeseID) && bigcheeseID.object_index == obj_golfburger && sprite_index == stunfallspr)
             sprite_index = walkspr
         bigcheeseID = -4
     }
     else
-        invincible = 1
+        invincible = true
 }
 else
-    invincible = 0
+    invincible = false
 if (hitbuffer > 0)
 {
-    invincible = 1
+    invincible = true
     hitbuffer--
 }
-if (state != (4 << 0))
+if (state != states.grabbed)
     depth = 0
-if (state != (138 << 0))
-    thrown = 0
-if (boundbox == 0)
+if (state != states.stun)
+    thrown = false
+if (boundbox == false)
 {
     with (instance_create(x, y, obj_baddiecollisionbox))
     {
         sprite_index = other.sprite_index
         mask_index = other.sprite_index
         baddieID = other.id
-        other.boundbox = 1
+        other.boundbox = true
     }
 }
-if (state == (156 << 0))
+if (state == states.thrown)
 {
     with (instance_place((x + xscale), y, obj_destructibles))
         instance_destroy()

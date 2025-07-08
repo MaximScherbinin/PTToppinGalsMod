@@ -17,7 +17,7 @@ if global.mod_graceball
     }
 
 }
-if (state == (8 << 0))
+if (state == states.transitioncutscene)
 {
     var ty = obj_screensizer.actual_height / 2
     y -= movespeed
@@ -26,10 +26,10 @@ if (state == (8 << 0))
     if (abs(y - ty) < 16)
     {
         y = ty
-        state = (0 << 0)
+        state = states.normal
     }
 }
-else if (state == (135 << 0))
+else if (state == states.fall)
 {
     y += movespeed
     movespeed = Approach(movespeed, 8, 2)
@@ -43,6 +43,6 @@ else if (collect > 0)
 }
 else
 {
-    state = (135 << 0)
+    state = states.fall
     movespeed = -2
 }

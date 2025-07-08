@@ -5,7 +5,7 @@ if (!instance_exists(baddieID))
 }
 x = baddieID.x
 y = baddieID.y
-if (baddieID.state == (134 << 0))
+if (baddieID.state == states.walk)
     sprite_index = global.mod_spr_pizzaface_attackend
 else
     sprite_index = baddieID.mask_index

@@ -4,7 +4,7 @@ function scr_pizzaball_thrown() //gml_Script_scr_pizzaball_thrown
         stuntouchbuffer--
     switch substate
     {
-        case (156 << 0):
+        case states.thrown:
             image_speed = 0.5
             var spr_hitwall = (global.mod_graceball ? spr_pizzaball_hitwall_grace : spr_pizzaball_hitwall)
             var spr_hitwall2 = (global.mod_graceball ? spr_pizzaball_hitwall2_grace : spr_pizzaball_hitwall2)
@@ -26,7 +26,7 @@ function scr_pizzaball_thrown() //gml_Script_scr_pizzaball_thrown
                     bounced = 1
                 }
                 else
-                    substate = (100 << 0)
+                    substate = states.crouch
             }
             if (scr_solid((x + hsp), y) && (!(place_meeting((x + hsp), y, obj_slope))) && (!(place_meeting((x + hsp), y, obj_destructibles))))
             {
@@ -37,7 +37,7 @@ function scr_pizzaball_thrown() //gml_Script_scr_pizzaball_thrown
                 hitspeed *= 0.5
             }
             break
-        case (100 << 0):
+        case states.crouch:
             sprite_index = (global.mod_graceball ? spr_pizzaball_roll_grace : spr_pizzaball_roll)
             hitspeed = Approach(hitspeed, 0, 0.2)
             hsp = image_xscale * hitspeed
@@ -46,7 +46,7 @@ function scr_pizzaball_thrown() //gml_Script_scr_pizzaball_thrown
             if (hitspeed == 0)
             {
                 sprite_index = walkspr
-                state = (134 << 0)
+                state = states.walk
             }
             break
     }

@@ -1,6 +1,6 @@
 pal_swap_init_system_fix(shd_pal_swapper)
 global.roommessage = "PIZZA TOWER WESTERN BUILD V3"
-global.longintro = 1
+global.longintro = true
 tdp_text_init()
 global.holiday = (0 << 0)
 var date = date_current_datetime()

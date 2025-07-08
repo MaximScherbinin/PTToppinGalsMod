@@ -13,7 +13,7 @@ function scr_pizzaface_destroy_sounds() //gml_Script_scr_pizzaface_destroy_sound
 
 function scr_pizzaface_update_sounds() //gml_Script_scr_pizzaface_update_sounds
 {
-    if (state == (230 << 0) && (substate == (144 << 0) || substate == (230 << 0)))
+    if (state == states.ram && (substate == states.arenaintro || substate == states.ram))
     {
         if (!fmod_event_instance_is_playing(snd_ram))
             fmod_event_instance_play(snd_ram)
@@ -21,7 +21,7 @@ function scr_pizzaface_update_sounds() //gml_Script_scr_pizzaface_update_sounds
     }
     else
         fmod_event_instance_stop(snd_ram, true)
-    if (state == (8 << 0))
+    if (state == states.transitioncutscene)
     {
         if (!fmod_event_instance_is_playing(snd_haywire))
             fmod_event_instance_play(snd_haywire)
@@ -29,7 +29,7 @@ function scr_pizzaface_update_sounds() //gml_Script_scr_pizzaface_update_sounds
     }
     else
         fmod_event_instance_stop(snd_haywire, true)
-    if (state == (144 << 0))
+    if (state == states.arenaintro)
     {
         if (!fmod_event_instance_is_playing(snd_wind))
             fmod_event_instance_play(snd_wind)
@@ -48,7 +48,7 @@ function scr_pizzaface_arenaintro() //gml_Script_scr_pizzaface_arenaintro
         x = room_width * 0.75
         with (obj_player1)
         {
-            state = (146 << 0)
+            state = states.actor
             image_speed = 0.35
             xscale = 1
             hsp = 0
@@ -60,7 +60,7 @@ function scr_pizzaface_arenaintro() //gml_Script_scr_pizzaface_arenaintro
             visible = false
         switch introstate
         {
-            case (0 << 0):
+            case states.normal:
                 y = ystart
                 sprite_index = spr_pizzaface
                 with (obj_player1)
@@ -71,7 +71,7 @@ function scr_pizzaface_arenaintro() //gml_Script_scr_pizzaface_arenaintro
                 introstate++
                 playervsp = -15
                 break
-            case (1 << 0):
+            case states.revolver:
                 with (obj_player1)
                 {
                     if place_meeting(x, y, obj_solid)
@@ -92,7 +92,7 @@ function scr_pizzaface_arenaintro() //gml_Script_scr_pizzaface_arenaintro
                     }
                 }
                 break
-            case (2 << 0):
+            case states.dynamite:
                 with (obj_player1)
                 {
                     if (floor(image_index) == (image_number - 1))
@@ -111,7 +111,7 @@ function scr_pizzaface_arenaintro() //gml_Script_scr_pizzaface_arenaintro
                     }
                 }
                 break
-            case (3 << 0):
+            case states.boots:
                 with (obj_player1)
                 {
                     if (floor(image_index) == (image_number - 1) && sprite_index == spr_facehurtup)
@@ -132,7 +132,7 @@ function scr_pizzaface_arenaintro() //gml_Script_scr_pizzaface_arenaintro
                     }
                 }
                 break
-            case (4 << 0):
+            case states.grabbed:
                 with (obj_player1)
                 {
                     if (floor(image_index) == (image_number - 1))
@@ -143,7 +143,7 @@ function scr_pizzaface_arenaintro() //gml_Script_scr_pizzaface_arenaintro
                 else
                     introstate++
                 break
-            case (5 << 0):
+            case states.tumble:
                 with (obj_player1)
                 {
                     if (floor(image_index) == (image_number - 1))
@@ -182,7 +182,7 @@ function scr_pizzaface_arenaintro() //gml_Script_scr_pizzaface_arenaintro
                     image_index = 0
                 }
                 break
-            case (6 << 0):
+            case states.finishingblow:
                 var _finish = false
                 if (floor(image_index) == (image_number - 1) && sprite_index == global.mod_spr_pizzaface_intro1)
                 {
@@ -202,10 +202,10 @@ function scr_pizzaface_arenaintro() //gml_Script_scr_pizzaface_arenaintro
                 }
                 if (sprite_index == global.mod_spr_pizzaface && _finish)
                 {
-                    state = (134 << 0)
+                    state = states.walk
                     with (obj_player1)
                     {
-                        state = (0 << 0)
+                        state = states.normal
                         sprite_index = spr_idle
                     }
                 }
@@ -261,8 +261,8 @@ function scr_pizzaface_normal() //gml_Script_scr_pizzaface_normal
             {
                 sprite_index = global.mod_spr_pizzaface_attackend
                 image_index = 0
-                state = (230 << 0)
-                substate = (8 << 0)
+                state = states.ram
+                substate = states.transitioncutscene
                 hsp = 0
                 return;
             }
@@ -286,10 +286,10 @@ function scr_pizzaface_normal() //gml_Script_scr_pizzaface_normal
                     else
                     {
                         nosespit = true
-                        state = (230 << 0)
+                        state = states.ram
                         sprite_index = global.mod_spr_pizzaface_attackstart
                         image_index = 0
-                        substate = (144 << 0)
+                        substate = states.arenaintro
                         ramdir = point_direction(x, y, (targetplayer.x + (irandom_range(-50, 50))), 402)
                         ramhsp = (-(lengthdir_x(6, ramdir)))
                         ramvsp = (-(lengthdir_y(6, ramdir)))
@@ -310,7 +310,7 @@ function scr_pizzaface_normal() //gml_Script_scr_pizzaface_normal
                 with (instance_create(x, y, b[0]))
                 {
                     important = true
-                    state = (294 << 0)
+                    state = states.pizzaheadjump
                     vsp = 10
                 }
             }
@@ -354,21 +354,21 @@ function scr_pizzaface_ram() //gml_Script_scr_pizzaface_ram
 {
     switch substate
     {
-        case (144 << 0):
+        case states.arenaintro:
             ramhsp = Approach(ramhsp, 0, 0.3)
             ramvsp = Approach(ramvsp, 0, 0.3)
             hsp = ramhsp
             vsp = ramvsp
             if (floor(image_index) == (image_number - 1))
             {
-                substate = (230 << 0)
+                substate = states.ram
                 var s = wastedhits
                 ramhsp = lengthdir_x((18 + s), ramdir)
                 ramvsp = lengthdir_y((18 + s), ramdir)
                 sprite_index = global.mod_spr_pizzaface_attack
             }
             break
-        case (230 << 0):
+        case states.ram:
             hsp = ramhsp
             vsp = ramvsp
             if (vsp < -5)
@@ -376,7 +376,7 @@ function scr_pizzaface_ram() //gml_Script_scr_pizzaface_ram
             if ((vsp > 0 && grounded) || place_meeting((x + sign(hsp)), y, obj_solid))
             {
                 fmod_event_one_shot_3d("event:/sfx/pep/groundpound", x, y)
-                substate = (136 << 0)
+                substate = states.land
                 landbuffer = 80
                 hitX = x
                 hitY = y
@@ -389,7 +389,7 @@ function scr_pizzaface_ram() //gml_Script_scr_pizzaface_ram
                     {
                         important = true
                         sprite_index = b[1]
-                        state = (294 << 0)
+                        state = states.pizzaheadjump
                     }
                 }
                 with (obj_camera)
@@ -399,14 +399,14 @@ function scr_pizzaface_ram() //gml_Script_scr_pizzaface_ram
                 }
             }
             break
-        case (136 << 0):
+        case states.land:
             hsp = 0
             x = hitX + (irandom_range(-1, 1))
             y = hitY + (irandom_range(-1, 1))
             if (floor(image_index) == (image_number - 1))
             {
                 fmod_event_one_shot_3d("event:/sfx/pizzaface/jump", x, y)
-                substate = (92 << 0)
+                substate = states.jump
                 sprite_index = global.mod_spr_pizzaface_attackjump
                 image_index = 0
                 vsp = -14
@@ -414,21 +414,21 @@ function scr_pizzaface_ram() //gml_Script_scr_pizzaface_ram
                 y = hitY
             }
             break
-        case (92 << 0):
+        case states.jump:
             if (floor(image_index) == (image_number - 1))
                 image_index = image_number - 1
             if (vsp > 0)
             {
-                substate = (8 << 0)
+                substate = states.transitioncutscene
                 vsp = 0
                 sprite_index = global.mod_spr_pizzaface_attackend
                 image_index = 0
             }
             break
-        case (8 << 0):
+        case states.transitioncutscene:
             vsp = 0
             if (floor(image_index) == (image_number - 1))
-                state = (134 << 0)
+                state = states.walk
             break
     }
 
@@ -460,11 +460,11 @@ function scr_pizzaface_transitioncutscene() //gml_Script_scr_pizzaface_transitio
     }
     switch substate
     {
-        case (293 << 0):
+        case states.animation:
             if (introbuffer > 0)
                 introbuffer--
             else
-                substate = (8 << 0)
+                substate = states.transitioncutscene
             with (obj_player1)
             {
                 hsp = 0
@@ -482,10 +482,10 @@ function scr_pizzaface_transitioncutscene() //gml_Script_scr_pizzaface_transitio
                 }
                 image_speed = 0.35
                 image_alpha = 1
-                state = (146 << 0)
+                state = states.actor
             }
             break
-        case (8 << 0):
+        case states.transitioncutscene:
             sprite_index = global.mod_spr_pizzahead_intro1
             var tx = room_width / 2
             var ty = room_height * 0.35
@@ -503,13 +503,13 @@ function scr_pizzaface_transitioncutscene() //gml_Script_scr_pizzaface_transitio
                 }
                 x = tx
                 y = ty
-                substate = (137 << 0)
+                substate = states.hit
                 sprite_index = global.mod_spr_pizzahead_intro2
                 image_index = 0
                 fmod_event_one_shot_3d("event:/sfx/pizzaface/open", x, y)
             }
             break
-        case (137 << 0):
+        case states.hit:
             if (floor(image_index) == (image_number - 1))
             {
                 fmod_event_one_shot_3d("event:/sfx/misc/explosion", x, y)
@@ -519,8 +519,8 @@ function scr_pizzaface_transitioncutscene() //gml_Script_scr_pizzaface_transitio
                 {
                     vsp = 0
                     hsp = 0
-                    state = (135 << 0)
-                    substate = (92 << 0)
+                    state = states.fall
+                    substate = states.jump
                     sprite_index = spr_pizzahead_intro3
                     if (x != obj_player1.x)
                         image_xscale = sign(obj_player1.x - x)

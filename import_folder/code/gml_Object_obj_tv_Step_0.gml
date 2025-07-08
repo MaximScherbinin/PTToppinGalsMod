@@ -46,7 +46,7 @@ if (bubblespr != -4 && bubblespr != spr_tv_bubbleclosed)
 }
 switch state
 {
-    case (0 << 0):
+    case states.normal:
         idlespr = spr_tv_idle
         if (!obj_player1.ispeppino)
             idlespr = spr_tv_idleN
@@ -65,7 +65,7 @@ switch state
         if ((!obj_player1.ispeppino) && global.panic)
             idlespr = spr_tv_exprpanicN
         var _state = obj_player1.state
-        if (_state == (84 << 0) || _state == (61 << 0))
+        if (_state == states.backbreaker || _state == states.chainsaw)
             _state = obj_player1.tauntstoredstate
         var _transfo = true
         var _transfospr = scr_tv_get_transfo_sprite()
@@ -88,7 +88,7 @@ switch state
                 {
                     if (mach4mode == true)
                         tv_do_expression(spr_tv_exprmach4, true)
-                    else if (state == (121 << 0) || sprite_index == spr_mach3boost)
+                    else if (state == states.mach3 || sprite_index == spr_mach3boost)
                         tv_do_expression(spr_tv_exprmach3, true)
                 }
             }
@@ -191,13 +191,13 @@ switch state
                     sprite_index = tvsprite
                     image_index = 0
                 }
-                state = (8 << 0)
+                state = states.transitioncutscene
             }
             else
                 bubblespr = -4
         }
         break
-    case (8 << 0):
+    case states.transitioncutscene:
         if (sprite_index == spr_tv_open && floor(image_index) == (image_number - 1))
             sprite_index = tvsprite
         if (sprite_index == tvsprite)
@@ -208,7 +208,7 @@ switch state
             {
                 promptx = promptxstart
                 ds_list_delete(tvprompts_list, 0)
-                state = (0 << 0)
+                state = states.normal
             }
         }
         break
@@ -221,7 +221,7 @@ switch state
                 sprite_index = expressionsprite
             }
             else
-                state = (0 << 0)
+                state = states.normal
             image_index = 0
         }
         break
@@ -253,7 +253,7 @@ switch state
             case spr_tv_exprhurtN8:
             case spr_tv_exprhurtN9:
             case spr_tv_exprhurtN10:
-                if (obj_player1.state != (107 << 0))
+                if (obj_player1.state != states.hurt)
                 {
                     if (expressionbuffer > 0)
                         expressionbuffer--
@@ -265,7 +265,7 @@ switch state
                 }
                 break
             case spr_tv_hurtG:
-                if (obj_player1.state != (196 << 0))
+                if (obj_player1.state != states.ratmounthurt)
                 {
                     if (expressionbuffer > 0)
                         expressionbuffer--
@@ -278,11 +278,11 @@ switch state
                 break
             case spr_tv_exprcombo:
             case spr_tv_exprcomboN:
-                if (global.combo < 3 || _transfospr != -4 || obj_player1.isgustavo || obj_player1.mach4mode || obj_player1.state == (107 << 0) || obj_player1.state == (121 << 0) || obj_player1.sprite_index == obj_player1.spr_mach3boost || global.stylethreshold >= 3)
+                if (global.combo < 3 || _transfospr != -4 || obj_player1.isgustavo || obj_player1.mach4mode || obj_player1.state == states.hurt || obj_player1.state == states.mach3 || obj_player1.sprite_index == obj_player1.spr_mach3boost || global.stylethreshold >= 3)
                 {
                     state = (250 << 0)
                     expressionsprite = -4
-                    if (obj_player1.state == (107 << 0))
+                    if (obj_player1.state == states.hurt)
                         tv_do_expression(spr_tv_exprhurt, true)
                 }
                 break
@@ -306,7 +306,7 @@ switch state
             case spr_tv_exprmach3N:
                 with (obj_player1)
                 {
-                    if (state != (121 << 0) && state != (37 << 0) && (state != (61 << 0) || (tauntstoredstate != (121 << 0) && tauntstoredstate != (37 << 0))) && sprite_index != spr_mach3boost && mach4mode == false)
+                    if (state != states.mach3 && state != states.climbwall && (state != states.chainsaw || (tauntstoredstate != states.mach3 && tauntstoredstate != states.climbwall)) && sprite_index != spr_mach3boost && mach4mode == false)
                     {
                         other.state = (250 << 0)
                         other.expressionsprite = -4
@@ -319,7 +319,7 @@ switch state
             case spr_tv_exprmach4N:
                 with (obj_player1)
                 {
-                    if (mach4mode == false && (state != (61 << 0) || (tauntstoredstate != (121 << 0) && tauntstoredstate != (37 << 0))))
+                    if (mach4mode == false && (state != states.chainsaw || (tauntstoredstate != states.mach3 && tauntstoredstate != states.climbwall)))
                     {
                         other.state = (250 << 0)
                         other.expressionsprite = -4
@@ -336,7 +336,7 @@ switch state
                     if isgustavo
                         _transfo = true
                 }
-                if (global.stylethreshold < 3 || _transfo || obj_player1.mach4mode || obj_player1.state == (107 << 0) || obj_player1.state == (121 << 0) || obj_player1.sprite_index == obj_player1.spr_mach3boost)
+                if (global.stylethreshold < 3 || _transfo || obj_player1.mach4mode || obj_player1.state == states.hurt || obj_player1.state == states.mach3 || obj_player1.sprite_index == obj_player1.spr_mach3boost)
                 {
                     state = (250 << 0)
                     expressionsprite = -4
@@ -352,7 +352,7 @@ switch state
                     if isgustavo
                         _transfo = true
                 }
-                if ((!global.panic) || _transfo || obj_player1.mach4mode || obj_player1.state == (107 << 0) || obj_player1.state == (121 << 0) || obj_player1.sprite_index == obj_player1.spr_mach3boost)
+                if ((!global.panic) || _transfo || obj_player1.mach4mode || obj_player1.state == states.hurt || obj_player1.state == states.mach3 || obj_player1.sprite_index == obj_player1.spr_mach3boost)
                 {
                     state = (250 << 0)
                     expressionsprite = -4

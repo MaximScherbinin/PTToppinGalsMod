@@ -27,7 +27,7 @@ if ((!other.ispeppino) || global.swapmode)
     {
         if (other.object_index == obj_fakepepfollower)
         {
-            use_palette = 1
+            use_palette = true
             spr_palette = spr_peppalette
             paletteselect = 1
             if obj_player1.ispeppino
@@ -35,23 +35,23 @@ if ((!other.ispeppino) || global.swapmode)
         }
         else if (other.object_index == obj_snottyexit)
         {
-            use_palette = 1
+            use_palette = true
             spr_palette = palette_cheeseslime
             paletteselect = 1
         }
         if other.use_palette
         {
-            use_palette = 1
+            use_palette = true
             paletteselect = other.paletteselect
             spr_palette = other.spr_palette
             oldpalettetexture = other.palettetexture
         }
-        if (t.state == (306 << 0) && t.hsp != 0)
+        if (t.state == states.machcancel && t.hsp != 0)
             image_xscale = (-sign(hsp))
         else
             image_xscale = (-t.xscale)
         sprite_index = other.spr_dead
         hsp = (-image_xscale) * 10
     }
-    instance_destroy(id, 0)
+    instance_destroy(id, false)
 }
