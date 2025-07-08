@@ -5,7 +5,7 @@
 
 # Importing
 
-###DUE TO MAJOR CHANGES TO UNDERTALEMODTOOL YOU MAY ENCOUNTER ISSUES WITH SCRIPTS, IMPORTING PROCESS WORKS BEST WITH v0.5.5 OF UTMTCE https://gamebanana.com/tools/14193
+### DUE TO MAJOR CHANGES TO UNDERTALEMODTOOL YOU MAY ENCOUNTER ISSUES WITH SCRIPTS, IMPORTING PROCESS WORKS BEST WITH v0.5.5 OF UTMTCE https://gamebanana.com/tools/14193
 
 in short, first import sprites using .CSX script included in the repository (you mostly wanna set special value to 3, speed to 1, speed type to frames per game frame, and offset to center), fix sprite offsets and animation speeds as they're not perfect (best you can do is use SpriteOriginCopy.csx script in the repository and use already modded data.win as a donor, or manually correct offsets and speeds by comparing to already modded data.win)
 
@@ -37,7 +37,7 @@ obj_toppinshroomexit
 
 obj_toppintomatoexit
 
-###FROM HERE YOU HAVE TO USE v0.6.0 of UTMTCE WHICH YOU CAN GET HERE https://nightly.link/XDOneDude/UndertaleModToolCE/workflows/publish_gui/master
+### FROM HERE YOU HAVE TO USE v0.6.0 of UTMTCE WHICH YOU CAN GET HERE https://nightly.link/XDOneDude/UndertaleModToolCE/workflows/publish_gui/master
 
 then import a script in "script" folder, and import scripts in "code" folder afterwards, all using ImportGML.CSX script.
 
