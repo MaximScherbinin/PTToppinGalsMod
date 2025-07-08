@@ -1,7 +1,7 @@
-function scr_read_game(arg0)
+function scr_read_game(argument0) //gml_Script_scr_read_game
 {
     var q = game_empty()
-    ini_open(arg0)
+    ini_open(argument0)
     q.percentage = ini_read_real("Game", "percent", 0)
     q.started = ini_read_real("Tutorial", "finished", 0)
     q.judgement = ini_read_string("Game", "finalrank", "none")
@@ -19,13 +19,11 @@ function scr_read_game(arg0)
     return q;
 }
 
-function menu_get_game(arg0, arg1)
+function menu_get_game(argument0, argument1) //gml_Script_menu_get_game
 {
-    var g = global.game[arg0]
-    
-    if (!arg1)
-        g = global.gameN[arg0]
-    
+    var g = global.game[argument0]
+    if (!argument1)
+        g = global.gameN[argument0]
     var q = 
     {
         percentage: g.percentage,
@@ -39,18 +37,16 @@ function menu_get_game(arg0, arg1)
         minutes: g.minutes,
         seconds: g.seconds
     }
+
     q.perstatus_icon = floor(q.percentage / 14.285714285714286)
-    
     if (q.perstatus_icon > (sprite_get_number(spr_percentstatemenu) - 1))
         q.perstatus_icon = sprite_get_number(spr_percentstatemenu) - 1
-    
     if (q.percentage >= 101)
         q.perstatus_icon = 8
-    
     return q;
 }
 
-function game_empty()
+function game_empty() //gml_Script_game_empty
 {
     return 
     {
@@ -68,3 +64,4 @@ function game_empty()
         palettetexture_player2: -4
     };
 }
+

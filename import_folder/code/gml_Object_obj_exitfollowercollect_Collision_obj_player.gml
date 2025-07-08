@@ -1,37 +1,28 @@
 if (object_index == obj_stickfollower || object_index == obj_gustavofollower || object_index == obj_noisefollower)
-    exit
-
-if (!other.ispeppino || global.swapmode)
+    return;
+if ((!other.ispeppino) || global.swapmode)
 {
     var t = other.id
     fmod_event_one_shot_3d("event:/sfx/enemies/kill", x, y)
-    notification_push(notifications.generic_killed, [room, id, object_index])
+    notification_push((2 << 0), [room, id, object_index])
     ds_list_add(global.baddieroom, id)
     global.combotime = 60
-    
     if (object_index == obj_toppinshroomexit || object_index == obj_toppincheeseexit || object_index == obj_toppintomatoexit || object_index == obj_toppinsausageexit || object_index == obj_toppinpineappleexit)
     {
-        with (create_debris(x, y - 32, spr_cagedebris, 0))
+        with (create_debris(x, (y - 32), spr_cagedebris, 0))
             image_index = 0
-        
-        with (create_debris(x, y + 32, spr_cagedebris, 0))
+        with (create_debris(x, (y + 32), spr_cagedebris, 0))
             image_index = 1
-        
-        with (create_debris(x - 10, y, spr_cagedebris, 0))
+        with (create_debris((x - 10), y, spr_cagedebris, 0))
             image_index = 2
-        
         with (create_debris(x, y, spr_cagedebris, 0))
             image_index = 3
-        
-        with (create_debris(x + 10, y, spr_cagedebris, 0))
+        with (create_debris((x + 10), y, spr_cagedebris, 0))
             image_index = 4
-        
         fmod_event_one_shot_3d("event:/misc/breakblock", x, y)
     }
-    
     instance_create(x, y, obj_bangeffect)
     instance_create(x, y, obj_genericpoofeffect)
-    
     with (instance_create(x, y, obj_sausageman_dead))
     {
         if (other.object_index == obj_fakepepfollower)
@@ -39,8 +30,7 @@ if (!other.ispeppino || global.swapmode)
             use_palette = 1
             spr_palette = spr_peppalette
             paletteselect = 1
-            
-            if (obj_player1.ispeppino)
+            if obj_player1.ispeppino
                 paletteselect = obj_player1.paletteselect
         }
         else if (other.object_index == obj_snottyexit)
@@ -49,412 +39,19 @@ if (!other.ispeppino || global.swapmode)
             spr_palette = palette_cheeseslime
             paletteselect = 1
         }
-        
-        if (other.use_palette)
+        if other.use_palette
         {
             use_palette = 1
             paletteselect = other.paletteselect
             spr_palette = other.spr_palette
             oldpalettetexture = other.palettetexture
         }
-        
-        if (t.state == states.machcancel && t.hsp != 0)
-            image_xscale = -sign(hsp)
+        if (t.state == (306 << 0) && t.hsp != 0)
+            image_xscale = (-sign(hsp))
         else
-            image_xscale = -t.xscale
-        
+            image_xscale = (-t.xscale)
         sprite_index = other.spr_dead
-        hsp = -image_xscale * 10
+        hsp = (-image_xscale) * 10
     }
-    
     instance_destroy(id, 0)
-}
-
-enum notifications
-{
-    bodyslam_start,
-    bodyslam_end,
-    generic_killed,
-    room_enemiesdead,
-    enemy_parried,
-    level_finished,
-    mortcube_destroyed,
-    hurt,
-    fell_into_pit,
-    beer_knocked,
-    touched_timedgate,
-    flush_done,
-    baddie_killed_projectile,
-    treasureguy_uncovered,
-    special_destroyable_destroyed,
-    custom_destructibles_destroyed,
-    pizzaball_shot,
-    pizzaball_kill,
-    pizzaball_goal,
-    brickball_start,
-    john_destroyed,
-    brickball_kill,
-    pigcitizen_taunt,
-    pizzaboy_killed,
-    touched_mrpinch,
-    priest_touched,
-    secret_entered,
-    secret_exited,
-    iceblock_bird_freed,
-    monster_killed,
-    monster_activated,
-    jumpscared,
-    knightpep_bumped,
-    cheeseblock_destroyed,
-    rat_destroyed_with_baddie,
-    rattumble_destroyed,
-    rat_destroyed,
-    touched_lava,
-    touched_cow,
-    touched_cow_once,
-    touched_gravesurf_once,
-    touched_ghostfollow,
-    ghost_end,
-    superjump_end,
-    shotgun_shot,
-    shotgun_shot_end,
-    destroyable_destroyed,
-    bazooka_explosion,
-    wartimer_finished,
-    totem_reactivated,
-    boss_defeated,
-    combo_end,
-    achievement_unlocked,
-    crouched_in_poo,
-    game_beaten,
-    taunted,
-    john_resurrected,
-    knight_obtained,
-    mooney_unlocked,
-    unknown59,
-    pumpkin_gotten,
-    pumpkindoor_entered,
-    trickytreat_failed,
-    trickytreat_door_entered,
-    tornadoattack_end,
-    gate_taunted,
-    noisebomb_wasted,
-    got_endingrank,
-    breakdance_start,
-    touched_banana,
-    level_finished_pizzaface,
-    player_antigrav,
-    ptg_seen,
-    touched_granny
-}
-
-enum states
-{
-    normal,
-    revolver,
-    dynamite,
-    boots,
-    grabbed,
-    tumble,
-    finishingblow,
-    ejected,
-    transitioncutscene,
-    fireass,
-    firemouth,
-    mort,
-    mortjump,
-    mortattack,
-    morthook,
-    hook,
-    ghost,
-    ghostpossess,
-    titlescreen,
-    hookshot,
-    tacklecharge,
-    cheeseball,
-    cheeseballclimbwall,
-    slap,
-    cheesepep,
-    cheesepepstick,
-    cheesepepjump,
-    cheesepepfling,
-    cheesepeplaunch,
-    cheesepepstickside,
-    cheesepepstickup,
-    rideweenie,
-    motorcycle,
-    boxxedpep,
-    boxxedpepspin,
-    boxxedpepjump,
-    pistolaim,
-    climbwall,
-    knightpepslopes,
-    portal,
-    secondjump,
-    chainsawbump,
-    handstandjump,
-    lungeattack,
-    lungegrab,
-    dashtumble,
-    gottreasure,
-    knightpep,
-    knightpepattack,
-    knightpepbump,
-    meteorpep,
-    bombpep,
-    bombgrab,
-    bombpepside,
-    bombpepup,
-    grabbing,
-    chainsawpogo,
-    shotgunjump,
-    pogo,
-    stunned,
-    highjump,
-    chainsaw,
-    facestomp,
-    unknown63,
-    timesup,
-    machroll,
-    shotgun,
-    shotguncrouch,
-    shotguncrouchjump,
-    shotgunshoot,
-    shotgundash,
-    shotgunfreefall,
-    pistol,
-    machfreefall,
-    throwing,
-    slam,
-    superslam,
-    skateboard,
-    grind,
-    grab,
-    punch,
-    backkick,
-    uppunch,
-    shoulder,
-    backbreaker,
-    graffiti,
-    bossdefeat,
-    pizzathrow,
-    bossintro,
-    gameover,
-    keyget,
-    tackle,
-    jump,
-    ladder,
-    slipnslide,
-    comingoutdoor,
-    smirk,
-    Sjump,
-    victory,
-    Sjumpprep,
-    crouch,
-    crouchjump,
-    crouchslide,
-    mach1,
-    mach2,
-    machslide,
-    bump,
-    hurt,
-    freefall,
-    hang,
-    unknown110,
-    freefallland,
-    door,
-    barrel,
-    barreljump,
-    barrelclimbwall,
-    barrelslide,
-    current,
-    boulder,
-    taxi,
-    runonball,
-    mach3,
-    freefallprep,
-    Sjumpland,
-    faceplant,
-    rage,
-    idle,
-    bounce,
-    charge,
-    pizzagoblinthrow,
-    turn,
-    unknown131,
-    unknown132,
-    rolling,
-    walk,
-    fall,
-    land,
-    hit,
-    stun,
-    unknown139,
-    unknown140,
-    chase,
-    arenaspawn,
-    arenaend,
-    arenaintro,
-    arenaround,
-    actor,
-    parry,
-    golf,
-    float,
-    tube,
-    unknown151,
-    taxi2,
-    shoulderbash,
-    pummel,
-    staggered,
-    thrown,
-    supershoulderbash,
-    superattackstart,
-    superattackcharge,
-    superattack,
-    shoulderturn,
-    fistmatch,
-    fistmatchend,
-    groundpunchstart,
-    slipbanan,
-    millionpunch,
-    skateboardturn,
-    bombthrow,
-    bombpogo,
-    jetpackstart,
-    jetpack,
-    jetpackstart2,
-    jetpackspin,
-    mrstick_shield,
-    mrstick_helicopterhat,
-    mrstick_panicjump,
-    mrstick_smokebombstart,
-    mrstick_smokebombcrawl,
-    mrstick_springshoes,
-    mrstick_cardboard,
-    mrstick_cardboardend,
-    mrstick_mockery,
-    bombdelete,
-    rocket,
-    rocketslide,
-    gotoplayer,
-    trickjump,
-    dance,
-    underground,
-    ridecow,
-    ratmount,
-    ratmountjump,
-    ratmountattack,
-    ratmountspit,
-    ratmountclimbwall,
-    ratmounthurt,
-    ratmountgroundpound,
-    ratmountbounce,
-    unknown199,
-    ratmountballoon,
-    ratmounttumble,
-    ratmountgrind,
-    ratmounttrickjump,
-    ratmountskid,
-    ratgrabbed,
-    blockstance,
-    balloon,
-    debugstate,
-    trashstart,
-    trashjump,
-    trashroll,
-    stringfling,
-    stringjump,
-    stringfall,
-    noisejetpack,
-    spiderweb,
-    monsteridle,
-    monsterintro,
-    monsterwalk,
-    monsterchase,
-    monsterinvestigate,
-    monsterrun,
-    flushidle,
-    flushflip,
-    animatronic,
-    moustache,
-    mouth,
-    eyes,
-    nose,
-    ram,
-    phase2transition,
-    look,
-    fishing,
-    unknown234,
-    bombrun,
-    npcthrow,
-    portraitthrow,
-    enguarde,
-    sexypicture,
-    pullinglevel,
-    eat,
-    surprisebox,
-    spinningrun,
-    spin,
-    spinningpunch,
-    groundpunch,
-    bigkick,
-    slamhead,
-    slamhead2,
-    whitenoise,
-    expression,
-    playersuperattack,
-    unknown253,
-    jetpackjump,
-    unknown255,
-    unknown256,
-    bee,
-    beechase,
-    ratmountpunch,
-    ratmountcrouch,
-    ratmountladder,
-    supergrab,
-    unknown263,
-    attract,
-    antigrav,
-    secret,
-    contemplate,
-    mini,
-    reloading,
-    estampede,
-    dropstart,
-    drop,
-    phase1hurt,
-    duel,
-    deformed,
-    grabdash,
-    grabthrow,
-    wait,
-    flamethrower,
-    machinegun,
-    bazooka,
-    crate,
-    noisecrusher,
-    droptrap,
-    noiseskateboard,
-    noiseballooncrash,
-    swinging,
-    stomp,
-    finale,
-    backtohub,
-    ghostcaught,
-    spaceshuttle,
-    animation,
-    pizzaheadjump,
-    fightball,
-    secretportal,
-    teleporter,
-    pizzaheadKO,
-    follow,
-    unknown300,
-    unknown301,
-    unknown302,
-    unknown303,
-    unknown304,
-    machcancelstart,
-    machcancel
 }

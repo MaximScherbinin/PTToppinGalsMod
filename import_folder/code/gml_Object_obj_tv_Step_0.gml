@@ -1,169 +1,130 @@
 tv_x = obj_screensizer.actual_width - 115
 tv_y = 80
-timer_xstart = (obj_screensizer.actual_width / 2) + timer_xplus
+timer_xstart = obj_screensizer.actual_width / 2 + timer_xplus
 timer_x = timer_xstart
 timer_ystart = obj_screensizer.actual_height + timer_yplus
-
 if (global.combotime > 0 && global.combo > 0)
     visualcombo = global.combo
-
-if (room == Realtitlescreen || room == Longintro || room == Mainmenu || room == rank_room || room == rm_levelselect || room == timesuproom || room == boss_room1 || room == characterselect || room == hub_loadingscreen || (string_copy(room_get_name(room), 1, 5) == "tower" && !global.panic))
+if (room == Realtitlescreen || room == Longintro || room == Mainmenu || room == rank_room || room == rm_levelselect || room == timesuproom || room == boss_room1 || room == characterselect || room == hub_loadingscreen || (string_copy(room_get_name(room), 1, 5) == "tower" && (!global.panic)))
 {
     visible = false
     sprite_index = spr_tv_off
 }
 else
-{
     visible = true
-}
-
-if ((instance_exists(obj_debugcontroller) && !obj_debugcontroller.showhud) || !global.option_hud)
+if ((instance_exists(obj_debugcontroller) && (!obj_debugcontroller.showhud)) || (!global.option_hud))
     visible = false
-
 image_speed = 0.35
-
-if (targetgolf != -4 && !instance_exists(targetgolf))
+if (targetgolf != noone && (!instance_exists(targetgolf)))
     targetgolf = -4
-
-if (targetgolf != -4 && !view_visible[1])
+if (targetgolf != -4 && (!view_visible[1]))
 {
     view_visible[1] = true
     view_enabled = true
 }
-
 if (bubblespr != -4 && bubblespr != spr_tv_bubbleclosed)
 {
     if (prompt != -4)
         prompt_buffer = 2
-    
     bubbleindex += image_speed
-    
     if (floor(bubbleindex) == sprite_get_number(bubblespr))
     {
         bubbleindex = 0
-        
-        switch (bubblespr)
+        switch bubblespr
         {
             case spr_tv_bubbleopen:
                 bubblespr = spr_tv_bubble
                 break
-            
             case spr_tv_bubbleclose:
                 bubblespr = spr_tv_bubbleclosed
-                
                 if (prompt == -4 || prompt == "")
                     bubblespr = -4
-                
                 break
         }
+
     }
 }
-
-switch (state)
+switch state
 {
-    case states.normal:
+    case (0 << 0):
         idlespr = spr_tv_idle
-        
         if (!obj_player1.ispeppino)
             idlespr = spr_tv_idleN
-        
-        if (global.panic)
+        if global.panic
             idlespr = spr_tv_exprpanic
-        else if (global.combo >= 3 && global.combo < 50 && !obj_player.isgustavo)
+        else if (global.combo >= 3 && global.combo < 50 && (!obj_player.isgustavo))
             idlespr = spr_tv_exprcombo
-        else if (global.combo >= 50 && !obj_player.isgustavo)
+        else if (global.combo >= 50 && (!obj_player.isgustavo))
             idlespr = spr_tv_exprheat
-        
-        if (obj_player1.isgustavo)
+        if obj_player1.isgustavo
         {
             idlespr = spr_tv_idleG
-            
-            if (global.panic)
+            if global.panic
                 idlespr = spr_tv_escapeG
         }
-        
-        if (!obj_player1.ispeppino && global.panic)
+        if ((!obj_player1.ispeppino) && global.panic)
             idlespr = spr_tv_exprpanicN
-        
         var _state = obj_player1.state
-        
-        if (_state == states.backbreaker || _state == states.chainsaw)
+        if (_state == (84 << 0) || _state == (61 << 0))
             _state = obj_player1.tauntstoredstate
-        
         var _transfo = true
         var _transfospr = scr_tv_get_transfo_sprite()
-        
         if (_transfospr == -4)
             _transfo = false
         else
             idlespr = _transfospr
-        
         if (!obj_player1.ispeppino)
         {
             var spr = sprite_get_name(idlespr)
             spr = asset_get_index(concat(spr, "N"))
-            
             if (spr > -1)
                 idlespr = spr
         }
-        
         if (!_transfo)
         {
             with (obj_player1)
             {
-                if (!isgustavo || !ispeppino)
+                if ((!isgustavo) || (!ispeppino))
                 {
                     if (mach4mode == true)
                         tv_do_expression(spr_tv_exprmach4, true)
-                    else if (state == states.mach3 || sprite_index == spr_mach3boost)
+                    else if (state == (121 << 0) || sprite_index == spr_mach3boost)
                         tv_do_expression(spr_tv_exprmach3, true)
                 }
             }
         }
-        
-        switch (sprite_index)
+        switch sprite_index
         {
             case spr_tv_off:
-                if (visible)
+                if visible
                 {
                     sprite_index = spr_tv_open
                     image_index = 0
                 }
-                
                 break
-            
             case spr_tv_open:
                 if (floor(image_index) == (image_number - 1))
                     sprite_index = idlespr
-                
                 break
-            
             case spr_tv_idle:
             case spr_tv_idleN:
                 if (idleanim > 0)
                     idleanim--
-                
                 if (sprite_index != idlespr)
                     sprite_index = idlespr
-                
                 if (idleanim <= 0 && floor(image_index) == (image_number - 1))
                 {
                     sprite_index = choose(spr_tv_idleanim1, spr_tv_idleanim2)
-                    
                     if (!obj_player1.ispeppino)
                     {
                         if (sprite_index == spr_tv_idleanim1)
                             sprite_index = spr_tv_idleanim1N
-                        
                         if (sprite_index == spr_tv_idleanim2)
                             sprite_index = spr_tv_idleanim2N
                     }
-                    
                     image_index = 0
                 }
-                
                 break
-            
             case spr_tv_idleanim1:
             case spr_tv_idleanim2:
             case spr_tv_idleanim1N:
@@ -171,25 +132,21 @@ switch (state)
                 if (floor(image_index) == (image_number - 1))
                 {
                     sprite_index = idlespr
-                    idleanim = 240 + (60 * irandom_range(-1, 2))
+                    idleanim = 240 + 60 * (irandom_range(-1, 2))
                 }
-                
                 if (idlespr != spr_tv_idle && idlespr != spr_tv_idleN)
                     sprite_index = idlespr
-                
                 break
-            
             default:
                 sprite_index = idlespr
         }
-        
+
         if (sprite_index != spr_tv_open)
         {
             if (!ds_list_empty(tvprompts_list))
             {
                 var b = ds_list_find_value(tvprompts_list, 0)
                 prompt_buffer = prompt_max
-                
                 if (b[0] != "" && b[0] != -4)
                 {
                     bubblespr = spr_tv_bubbleopen
@@ -202,26 +159,21 @@ switch (state)
                 {
                     if (bubblespr != -4 && bubblespr != spr_tv_bubbleclosed)
                         bubblespr = spr_tv_bubbleclose
-                    
                     if (bubblespr == spr_tv_bubbleclosed)
                         bubblespr = -4
-                    
                     bubbleindex = 0
                     promptx = promptxstart
                     prompt = -4
                 }
-                
-                if (b[1] == UnknownEnum.Value_0)
+                if (b[1] == (0 << 0))
                 {
                     sprite_index = spr_tv_open
                     image_index = 0
                     tvsprite = b[2]
-                    
                     if (!obj_player1.ispeppino)
                     {
-                        var spr = sprite_get_name(tvsprite)
+                        spr = sprite_get_name(tvsprite)
                         spr = asset_get_index(concat(spr, "N"))
-                        
                         if (spr > -1)
                             tvsprite = spr
                     }
@@ -229,74 +181,55 @@ switch (state)
                 else
                 {
                     tvsprite = b[2]
-                    
                     if (!obj_player1.ispeppino)
                     {
-                        var spr = sprite_get_name(tvsprite)
+                        spr = sprite_get_name(tvsprite)
                         spr = asset_get_index(concat(spr, "N"))
-                        
                         if (spr > -1)
                             tvsprite = spr
                     }
-                    
                     sprite_index = tvsprite
                     image_index = 0
                 }
-                
-                state = states.transitioncutscene
+                state = (8 << 0)
             }
             else
-            {
                 bubblespr = -4
-            }
         }
-        
         break
-    
-    case states.transitioncutscene:
+    case (8 << 0):
         if (sprite_index == spr_tv_open && floor(image_index) == (image_number - 1))
             sprite_index = tvsprite
-        
         if (sprite_index == tvsprite)
         {
             if (prompt_buffer > 0)
-            {
                 prompt_buffer--
-            }
             else
             {
                 promptx = promptxstart
                 ds_list_delete(tvprompts_list, 0)
-                state = states.normal
+                state = (0 << 0)
             }
         }
-        
         break
-    
-    case states.whitenoise:
+    case (250 << 0):
         if (tv_trans >= sprite_get_number(spr_tv_whitenoise))
         {
             if (expressionsprite != -4)
             {
-                state = states.expression
+                state = (251 << 0)
                 sprite_index = expressionsprite
             }
             else
-            {
-                state = states.normal
-            }
-            
+                state = (0 << 0)
             image_index = 0
         }
-        
         break
-    
-    case states.expression:
+    case (251 << 0):
         var s = state
         var es = expressionsprite
-        var _transfospr = scr_tv_get_transfo_sprite()
-        
-        switch (expressionsprite)
+        _transfospr = scr_tv_get_transfo_sprite()
+        switch expressionsprite
         {
             case spr_tv_exprhurt:
             case spr_tv_exprhurtN:
@@ -320,50 +253,39 @@ switch (state)
             case spr_tv_exprhurtN8:
             case spr_tv_exprhurtN9:
             case spr_tv_exprhurtN10:
-                if (obj_player1.state != states.hurt)
+                if (obj_player1.state != (107 << 0))
                 {
                     if (expressionbuffer > 0)
-                    {
                         expressionbuffer--
-                    }
                     else
                     {
-                        state = states.whitenoise
+                        state = (250 << 0)
                         expressionsprite = -4
                     }
                 }
-                
                 break
-            
             case spr_tv_hurtG:
-                if (obj_player1.state != states.ratmounthurt)
+                if (obj_player1.state != (196 << 0))
                 {
                     if (expressionbuffer > 0)
-                    {
                         expressionbuffer--
-                    }
                     else
                     {
-                        state = states.whitenoise
+                        state = (250 << 0)
                         expressionsprite = -4
                     }
                 }
-                
                 break
-            
             case spr_tv_exprcombo:
             case spr_tv_exprcomboN:
-                if (global.combo < 3 || _transfospr != -4 || obj_player1.isgustavo || obj_player1.mach4mode || obj_player1.state == states.hurt || obj_player1.state == states.mach3 || obj_player1.sprite_index == obj_player1.spr_mach3boost || global.stylethreshold >= 3)
+                if (global.combo < 3 || _transfospr != -4 || obj_player1.isgustavo || obj_player1.mach4mode || obj_player1.state == (107 << 0) || obj_player1.state == (121 << 0) || obj_player1.sprite_index == obj_player1.spr_mach3boost || global.stylethreshold >= 3)
                 {
-                    state = states.whitenoise
+                    state = (250 << 0)
                     expressionsprite = -4
-                    
-                    if (obj_player1.state == states.hurt)
+                    if (obj_player1.state == (107 << 0))
                         tv_do_expression(spr_tv_exprhurt, true)
                 }
-                
                 break
-            
             case spr_tv_exprcollect:
             case spr_tv_exprcollectN:
             case spr_tv_happyG:
@@ -373,136 +295,108 @@ switch (state)
             case spr_tv_toppinsausage:
             case spr_tv_toppinpineapple:
                 if (expressionbuffer > 0)
-                {
                     expressionbuffer--
-                }
                 else
                 {
-                    state = states.whitenoise
+                    state = (250 << 0)
                     expressionsprite = -4
                 }
-                
                 break
-            
             case spr_tv_exprmach3:
             case spr_tv_exprmach3N:
                 with (obj_player1)
                 {
-                    if (state != states.mach3 && state != states.climbwall && (state != states.chainsaw || (tauntstoredstate != states.mach3 && tauntstoredstate != states.climbwall)) && sprite_index != spr_mach3boost && mach4mode == false)
+                    if (state != (121 << 0) && state != (37 << 0) && (state != (61 << 0) || (tauntstoredstate != (121 << 0) && tauntstoredstate != (37 << 0))) && sprite_index != spr_mach3boost && mach4mode == false)
                     {
-                        other.state = states.whitenoise
+                        other.state = (250 << 0)
                         other.expressionsprite = -4
                     }
-                    
-                    if (mach4mode)
+                    if mach4mode
                         tv_do_expression(spr_tv_exprmach4, true)
                 }
-                
                 break
-            
             case spr_tv_exprmach4:
             case spr_tv_exprmach4N:
                 with (obj_player1)
                 {
-                    if (mach4mode == false && (state != states.chainsaw || (tauntstoredstate != states.mach3 && tauntstoredstate != states.climbwall)))
+                    if (mach4mode == false && (state != (61 << 0) || (tauntstoredstate != (121 << 0) && tauntstoredstate != (37 << 0))))
                     {
-                        other.state = states.whitenoise
+                        other.state = (250 << 0)
                         other.expressionsprite = -4
                     }
                 }
-                
                 break
-            
             case spr_tv_exprheat:
             case spr_tv_exprheatN:
-                var _transfo = false
-                
+                _transfo = false
                 with (obj_player1)
                 {
                     if (_transfospr != -4)
                         _transfo = true
-                    
-                    if (isgustavo)
+                    if isgustavo
                         _transfo = true
                 }
-                
-                if (global.stylethreshold < 3 || _transfo || obj_player1.mach4mode || obj_player1.state == states.hurt || obj_player1.state == states.mach3 || obj_player1.sprite_index == obj_player1.spr_mach3boost)
+                if (global.stylethreshold < 3 || _transfo || obj_player1.mach4mode || obj_player1.state == (107 << 0) || obj_player1.state == (121 << 0) || obj_player1.sprite_index == obj_player1.spr_mach3boost)
                 {
-                    state = states.whitenoise
+                    state = (250 << 0)
                     expressionsprite = -4
                 }
-                
                 break
-            
             case spr_tv_exprpanic:
             case spr_tv_exprpanicN:
-                var _transfo = false
-                
+                _transfo = false
                 with (obj_player1)
                 {
-                    if (_transfospr)
+                    if _transfospr
                         _transfo = true
-                    
-                    if (isgustavo)
+                    if isgustavo
                         _transfo = true
                 }
-                
-                if (!global.panic || _transfo || obj_player1.mach4mode || obj_player1.state == states.hurt || obj_player1.state == states.mach3 || obj_player1.sprite_index == obj_player1.spr_mach3boost)
+                if ((!global.panic) || _transfo || obj_player1.mach4mode || obj_player1.state == (107 << 0) || obj_player1.state == (121 << 0) || obj_player1.sprite_index == obj_player1.spr_mach3boost)
                 {
-                    state = states.whitenoise
+                    state = (250 << 0)
                     expressionsprite = -4
                 }
-                
                 break
         }
-        
+
         if (!ds_list_empty(tvprompts_list))
         {
-            state = states.whitenoise
+            state = (250 << 0)
             tv_trans = 0
             expressionsprite = -4
         }
-        
         break
 }
 
-if (state != states.whitenoise && state != states.expression && instance_exists(obj_player1))
+if (state != (250 << 0) && state != (251 << 0) && instance_exists(obj_player1))
     tv_get_palette()
-
-if (state != states.whitenoise)
+if (state != (250 << 0))
     tv_trans = 0
 else
     tv_trans += 0.35
-
 var change_pos = false
-
 if (obj_player.x > (room_width - 224) && obj_player.y < 187)
     change_pos = true
-
 if (bubblespr != -4 && obj_player.x > 316 && obj_player.y < 101)
     change_pos = true
-
 var spd = 15
-
-if (change_pos)
+if change_pos
     hud_posY = Approach(hud_posY, -300, spd)
 else
     hud_posY = Approach(hud_posY, 0, spd)
-
 pizzaface_index += 0.35
 hand_index += 0.35
 johnface_index += 0.35
-
 if (global.panic && global.fill > 0)
 {
     showtime_buffer = 100
-    
     if (!instance_exists(obj_ghostcollectibles))
         timer_y = Approach(timer_y, timer_ystart, 1)
     else
-        timer_y = Approach(timer_y, timer_ystart + 212, 4)
+        timer_y = Approach(timer_y, (timer_ystart + 212), 4)
 }
-else if (global.panic)
+else if global.panic
 {
     if (pizzaface_sprite == global.mod_spr_timer_pizzaface1)
     {
@@ -518,13 +412,9 @@ else if (global.panic)
         }
     }
     else if (showtime_buffer > 0)
-    {
         showtime_buffer--
-    }
     else
-    {
-        timer_y = Approach(timer_y, timer_ystart + 212, 1)
-    }
+        timer_y = Approach(timer_y, (timer_ystart + 212), 1)
 }
 else
 {
@@ -532,75 +422,56 @@ else
     hand_sprite = spr_timer_hand1
     timer_y = timer_ystart + 212
 }
-
 if (global.panic && global.fill < (chunkmax / 5))
     hand_sprite = spr_timer_hand2
-
 barfill_x -= 0.2
-
 if (barfill_x < -173)
     barfill_x = 0
-
 if (pizzaface_index > (sprite_get_number(pizzaface_sprite) - 1))
     pizzaface_index = frac(pizzaface_index)
-
 if (hand_index > (sprite_get_number(hand_sprite) - 1))
     hand_index = frac(hand_index)
-
 if (johnface_index > (sprite_get_number(johnface_sprite) - 1))
     johnface_index = frac(johnface_index)
-
 combo_posX = Wave(-5, 5, 2, 20)
-
 if (global.combotime > 0 && global.combo != 0)
 {
-    switch (combo_state)
+    switch combo_state
     {
         case 0:
             combo_posY += combo_vsp
             combo_vsp += 0.5
-            
             if (combo_posY > 20)
                 combo_state++
-            
             break
-        
         case 1:
             combo_posY = lerp(combo_posY, 0, 0.05)
-            
             if (combo_posY < 1)
             {
                 combo_posY = 0
                 combo_vsp = 0
                 combo_state++
             }
-            
             break
-        
         case 2:
             if (global.combotime < 30)
             {
                 combo_posY += combo_vsp
-                
                 if (combo_vsp < 20)
                     combo_vsp += 0.5
-                
                 if (combo_posY > 0)
                 {
                     combo_posY = 0
                     combo_vsp = -1
-                    
                     if (global.combotime < 15)
                         combo_vsp = -2
                 }
             }
             else
-            {
                 combo_posY = Approach(combo_posY, 0, 10)
-            }
-            
             break
     }
+
 }
 else
 {
@@ -608,333 +479,6 @@ else
     combo_vsp = 0
     combo_state = 0
 }
-
 combofill_index += 0.35
-
 if (combofill_index > (sprite_get_number(spr_tv_combobubblefill) - 1))
     combofill_index = frac(combofill_index)
-
-enum UnknownEnum
-{
-    Value_0,
-    Value_8 = 8,
-    Value_37 = 37,
-    Value_61 = 61,
-    Value_84 = 84,
-    Value_107 = 107,
-    Value_121 = 121,
-    Value_196 = 196,
-    Value_250 = 250,
-    Value_251
-}
-
-enum states
-{
-    normal,
-    revolver,
-    dynamite,
-    boots,
-    grabbed,
-    tumble,
-    finishingblow,
-    ejected,
-    transitioncutscene,
-    fireass,
-    firemouth,
-    mort,
-    mortjump,
-    mortattack,
-    morthook,
-    hook,
-    ghost,
-    ghostpossess,
-    titlescreen,
-    hookshot,
-    tacklecharge,
-    cheeseball,
-    cheeseballclimbwall,
-    slap,
-    cheesepep,
-    cheesepepstick,
-    cheesepepjump,
-    cheesepepfling,
-    cheesepeplaunch,
-    cheesepepstickside,
-    cheesepepstickup,
-    rideweenie,
-    motorcycle,
-    boxxedpep,
-    boxxedpepspin,
-    boxxedpepjump,
-    pistolaim,
-    climbwall,
-    knightpepslopes,
-    portal,
-    secondjump,
-    chainsawbump,
-    handstandjump,
-    lungeattack,
-    lungegrab,
-    dashtumble,
-    gottreasure,
-    knightpep,
-    knightpepattack,
-    knightpepbump,
-    meteorpep,
-    bombpep,
-    bombgrab,
-    bombpepside,
-    bombpepup,
-    grabbing,
-    chainsawpogo,
-    shotgunjump,
-    pogo,
-    stunned,
-    highjump,
-    chainsaw,
-    facestomp,
-    unknown63,
-    timesup,
-    machroll,
-    shotgun,
-    shotguncrouch,
-    shotguncrouchjump,
-    shotgunshoot,
-    shotgundash,
-    shotgunfreefall,
-    pistol,
-    machfreefall,
-    throwing,
-    slam,
-    superslam,
-    skateboard,
-    grind,
-    grab,
-    punch,
-    backkick,
-    uppunch,
-    shoulder,
-    backbreaker,
-    graffiti,
-    bossdefeat,
-    pizzathrow,
-    bossintro,
-    gameover,
-    keyget,
-    tackle,
-    jump,
-    ladder,
-    slipnslide,
-    comingoutdoor,
-    smirk,
-    Sjump,
-    victory,
-    Sjumpprep,
-    crouch,
-    crouchjump,
-    crouchslide,
-    mach1,
-    mach2,
-    machslide,
-    bump,
-    hurt,
-    freefall,
-    hang,
-    unknown110,
-    freefallland,
-    door,
-    barrel,
-    barreljump,
-    barrelclimbwall,
-    barrelslide,
-    current,
-    boulder,
-    taxi,
-    runonball,
-    mach3,
-    freefallprep,
-    Sjumpland,
-    faceplant,
-    rage,
-    idle,
-    bounce,
-    charge,
-    pizzagoblinthrow,
-    turn,
-    unknown131,
-    unknown132,
-    rolling,
-    walk,
-    fall,
-    land,
-    hit,
-    stun,
-    unknown139,
-    unknown140,
-    chase,
-    arenaspawn,
-    arenaend,
-    arenaintro,
-    arenaround,
-    actor,
-    parry,
-    golf,
-    float,
-    tube,
-    unknown151,
-    taxi2,
-    shoulderbash,
-    pummel,
-    staggered,
-    thrown,
-    supershoulderbash,
-    superattackstart,
-    superattackcharge,
-    superattack,
-    shoulderturn,
-    fistmatch,
-    fistmatchend,
-    groundpunchstart,
-    slipbanan,
-    millionpunch,
-    skateboardturn,
-    bombthrow,
-    bombpogo,
-    jetpackstart,
-    jetpack,
-    jetpackstart2,
-    jetpackspin,
-    mrstick_shield,
-    mrstick_helicopterhat,
-    mrstick_panicjump,
-    mrstick_smokebombstart,
-    mrstick_smokebombcrawl,
-    mrstick_springshoes,
-    mrstick_cardboard,
-    mrstick_cardboardend,
-    mrstick_mockery,
-    bombdelete,
-    rocket,
-    rocketslide,
-    gotoplayer,
-    trickjump,
-    dance,
-    underground,
-    ridecow,
-    ratmount,
-    ratmountjump,
-    ratmountattack,
-    ratmountspit,
-    ratmountclimbwall,
-    ratmounthurt,
-    ratmountgroundpound,
-    ratmountbounce,
-    unknown199,
-    ratmountballoon,
-    ratmounttumble,
-    ratmountgrind,
-    ratmounttrickjump,
-    ratmountskid,
-    ratgrabbed,
-    blockstance,
-    balloon,
-    debugstate,
-    trashstart,
-    trashjump,
-    trashroll,
-    stringfling,
-    stringjump,
-    stringfall,
-    noisejetpack,
-    spiderweb,
-    monsteridle,
-    monsterintro,
-    monsterwalk,
-    monsterchase,
-    monsterinvestigate,
-    monsterrun,
-    flushidle,
-    flushflip,
-    animatronic,
-    moustache,
-    mouth,
-    eyes,
-    nose,
-    ram,
-    phase2transition,
-    look,
-    fishing,
-    unknown234,
-    bombrun,
-    npcthrow,
-    portraitthrow,
-    enguarde,
-    sexypicture,
-    pullinglevel,
-    eat,
-    surprisebox,
-    spinningrun,
-    spin,
-    spinningpunch,
-    groundpunch,
-    bigkick,
-    slamhead,
-    slamhead2,
-    whitenoise,
-    expression,
-    playersuperattack,
-    unknown253,
-    jetpackjump,
-    unknown255,
-    unknown256,
-    bee,
-    beechase,
-    ratmountpunch,
-    ratmountcrouch,
-    ratmountladder,
-    supergrab,
-    unknown263,
-    attract,
-    antigrav,
-    secret,
-    contemplate,
-    mini,
-    reloading,
-    estampede,
-    dropstart,
-    drop,
-    phase1hurt,
-    duel,
-    deformed,
-    grabdash,
-    grabthrow,
-    wait,
-    flamethrower,
-    machinegun,
-    bazooka,
-    crate,
-    noisecrusher,
-    droptrap,
-    noiseskateboard,
-    noiseballooncrash,
-    swinging,
-    stomp,
-    finale,
-    backtohub,
-    ghostcaught,
-    spaceshuttle,
-    animation,
-    pizzaheadjump,
-    fightball,
-    secretportal,
-    teleporter,
-    pizzaheadKO,
-    follow,
-    unknown300,
-    unknown301,
-    unknown302,
-    unknown303,
-    unknown304,
-    machcancelstart,
-    machcancel
-}

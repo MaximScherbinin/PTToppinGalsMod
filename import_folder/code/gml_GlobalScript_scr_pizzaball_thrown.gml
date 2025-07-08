@@ -1,22 +1,18 @@
-function scr_pizzaball_thrown()
+function scr_pizzaball_thrown() //gml_Script_scr_pizzaball_thrown
 {
     if (stuntouchbuffer > 0)
         stuntouchbuffer--
-    
-    switch (substate)
+    switch substate
     {
-        case states.thrown:
+        case (156 << 0):
             image_speed = 0.5
-            var spr_hitwall = global.mod_graceball ? spr_pizzaball_hitwall_grace : spr_pizzaball_hitwall
-            var spr_hitwall2 = global.mod_graceball ? 4728 : 1612
-            
+            var spr_hitwall = (global.mod_graceball ? spr_pizzaball_hitwall_grace : spr_pizzaball_hitwall)
+            var spr_hitwall2 = (global.mod_graceball ? spr_pizzaball_hitwall2_grace : spr_pizzaball_hitwall2)
             if (sprite_index != spr_hitwall && sprite_index != spr_hitwall2)
-                sprite_index = global.mod_graceball ? spr_pizzaball_roll_grace : spr_pizzaball_roll
+                sprite_index = (global.mod_graceball ? spr_pizzaball_roll_grace : spr_pizzaball_roll)
             else if (floor(image_index) == (image_number - 1))
-                sprite_index = global.mod_graceball ? spr_pizzaball_roll_grace : spr_pizzaball_roll
-            
+                sprite_index = (global.mod_graceball ? spr_pizzaball_roll_grace : spr_pizzaball_roll)
             hsp = image_xscale * hitspeed
-            
             if (grounded && vsp > 0)
             {
                 if (!bounced)
@@ -26,16 +22,13 @@ function scr_pizzaball_thrown()
                     image_index = 0
                     hitspeed *= 0.8
                     jumpspeed *= 0.25
-                    vsp = -jumpspeed
+                    vsp = (-jumpspeed)
                     bounced = 1
                 }
                 else
-                {
-                    substate = states.crouch
-                }
+                    substate = (100 << 0)
             }
-            
-            if (scr_solid(x + hsp, y) && !place_meeting(x + hsp, y, obj_slope) && !place_meeting(x + hsp, y, obj_destructibles))
+            if (scr_solid((x + hsp), y) && (!(place_meeting((x + hsp), y, obj_slope))) && (!(place_meeting((x + hsp), y, obj_destructibles))))
             {
                 fmod_event_one_shot_3d("event:/sfx/misc/golfbump", x, y)
                 sprite_index = spr_hitwall
@@ -43,334 +36,20 @@ function scr_pizzaball_thrown()
                 image_xscale *= -1
                 hitspeed *= 0.5
             }
-            
             break
-        
-        case states.crouch:
-            sprite_index = global.mod_graceball ? spr_pizzaball_roll_grace : spr_pizzaball_roll
+        case (100 << 0):
+            sprite_index = (global.mod_graceball ? spr_pizzaball_roll_grace : spr_pizzaball_roll)
             hitspeed = Approach(hitspeed, 0, 0.2)
             hsp = image_xscale * hitspeed
-            
-            if (scr_solid(x + hsp, y) && !place_meeting(x + hsp, y, obj_slope) && !place_meeting(x + hsp, y, obj_destructibles))
+            if (scr_solid((x + hsp), y) && (!(place_meeting((x + hsp), y, obj_slope))) && (!(place_meeting((x + hsp), y, obj_destructibles))))
                 image_xscale *= -1
-            
             if (hitspeed == 0)
             {
                 sprite_index = walkspr
-                state = states.walk
+                state = (134 << 0)
             }
-            
             break
     }
+
 }
 
-enum states
-{
-    normal,
-    revolver,
-    dynamite,
-    boots,
-    grabbed,
-    tumble,
-    finishingblow,
-    ejected,
-    transitioncutscene,
-    fireass,
-    firemouth,
-    mort,
-    mortjump,
-    mortattack,
-    morthook,
-    hook,
-    ghost,
-    ghostpossess,
-    titlescreen,
-    hookshot,
-    tacklecharge,
-    cheeseball,
-    cheeseballclimbwall,
-    slap,
-    cheesepep,
-    cheesepepstick,
-    cheesepepjump,
-    cheesepepfling,
-    cheesepeplaunch,
-    cheesepepstickside,
-    cheesepepstickup,
-    rideweenie,
-    motorcycle,
-    boxxedpep,
-    boxxedpepspin,
-    boxxedpepjump,
-    pistolaim,
-    climbwall,
-    knightpepslopes,
-    portal,
-    secondjump,
-    chainsawbump,
-    handstandjump,
-    lungeattack,
-    lungegrab,
-    dashtumble,
-    gottreasure,
-    knightpep,
-    knightpepattack,
-    knightpepbump,
-    meteorpep,
-    bombpep,
-    bombgrab,
-    bombpepside,
-    bombpepup,
-    grabbing,
-    chainsawpogo,
-    shotgunjump,
-    pogo,
-    stunned,
-    highjump,
-    chainsaw,
-    facestomp,
-    unknown63,
-    timesup,
-    machroll,
-    shotgun,
-    shotguncrouch,
-    shotguncrouchjump,
-    shotgunshoot,
-    shotgundash,
-    shotgunfreefall,
-    pistol,
-    machfreefall,
-    throwing,
-    slam,
-    superslam,
-    skateboard,
-    grind,
-    grab,
-    punch,
-    backkick,
-    uppunch,
-    shoulder,
-    backbreaker,
-    graffiti,
-    bossdefeat,
-    pizzathrow,
-    bossintro,
-    gameover,
-    keyget,
-    tackle,
-    jump,
-    ladder,
-    slipnslide,
-    comingoutdoor,
-    smirk,
-    Sjump,
-    victory,
-    Sjumpprep,
-    crouch,
-    crouchjump,
-    crouchslide,
-    mach1,
-    mach2,
-    machslide,
-    bump,
-    hurt,
-    freefall,
-    hang,
-    unknown110,
-    freefallland,
-    door,
-    barrel,
-    barreljump,
-    barrelclimbwall,
-    barrelslide,
-    current,
-    boulder,
-    taxi,
-    runonball,
-    mach3,
-    freefallprep,
-    Sjumpland,
-    faceplant,
-    rage,
-    idle,
-    bounce,
-    charge,
-    pizzagoblinthrow,
-    turn,
-    unknown131,
-    unknown132,
-    rolling,
-    walk,
-    fall,
-    land,
-    hit,
-    stun,
-    unknown139,
-    unknown140,
-    chase,
-    arenaspawn,
-    arenaend,
-    arenaintro,
-    arenaround,
-    actor,
-    parry,
-    golf,
-    float,
-    tube,
-    unknown151,
-    taxi2,
-    shoulderbash,
-    pummel,
-    staggered,
-    thrown,
-    supershoulderbash,
-    superattackstart,
-    superattackcharge,
-    superattack,
-    shoulderturn,
-    fistmatch,
-    fistmatchend,
-    groundpunchstart,
-    slipbanan,
-    millionpunch,
-    skateboardturn,
-    bombthrow,
-    bombpogo,
-    jetpackstart,
-    jetpack,
-    jetpackstart2,
-    jetpackspin,
-    mrstick_shield,
-    mrstick_helicopterhat,
-    mrstick_panicjump,
-    mrstick_smokebombstart,
-    mrstick_smokebombcrawl,
-    mrstick_springshoes,
-    mrstick_cardboard,
-    mrstick_cardboardend,
-    mrstick_mockery,
-    bombdelete,
-    rocket,
-    rocketslide,
-    gotoplayer,
-    trickjump,
-    dance,
-    underground,
-    ridecow,
-    ratmount,
-    ratmountjump,
-    ratmountattack,
-    ratmountspit,
-    ratmountclimbwall,
-    ratmounthurt,
-    ratmountgroundpound,
-    ratmountbounce,
-    unknown199,
-    ratmountballoon,
-    ratmounttumble,
-    ratmountgrind,
-    ratmounttrickjump,
-    ratmountskid,
-    ratgrabbed,
-    blockstance,
-    balloon,
-    debugstate,
-    trashstart,
-    trashjump,
-    trashroll,
-    stringfling,
-    stringjump,
-    stringfall,
-    noisejetpack,
-    spiderweb,
-    monsteridle,
-    monsterintro,
-    monsterwalk,
-    monsterchase,
-    monsterinvestigate,
-    monsterrun,
-    flushidle,
-    flushflip,
-    animatronic,
-    moustache,
-    mouth,
-    eyes,
-    nose,
-    ram,
-    phase2transition,
-    look,
-    fishing,
-    unknown234,
-    bombrun,
-    npcthrow,
-    portraitthrow,
-    enguarde,
-    sexypicture,
-    pullinglevel,
-    eat,
-    surprisebox,
-    spinningrun,
-    spin,
-    spinningpunch,
-    groundpunch,
-    bigkick,
-    slamhead,
-    slamhead2,
-    whitenoise,
-    expression,
-    playersuperattack,
-    unknown253,
-    jetpackjump,
-    unknown255,
-    unknown256,
-    bee,
-    beechase,
-    ratmountpunch,
-    ratmountcrouch,
-    ratmountladder,
-    supergrab,
-    unknown263,
-    attract,
-    antigrav,
-    secret,
-    contemplate,
-    mini,
-    reloading,
-    estampede,
-    dropstart,
-    drop,
-    phase1hurt,
-    duel,
-    deformed,
-    grabdash,
-    grabthrow,
-    wait,
-    flamethrower,
-    machinegun,
-    bazooka,
-    crate,
-    noisecrusher,
-    droptrap,
-    noiseskateboard,
-    noiseballooncrash,
-    swinging,
-    stomp,
-    finale,
-    backtohub,
-    ghostcaught,
-    spaceshuttle,
-    animation,
-    pizzaheadjump,
-    fightball,
-    secretportal,
-    teleporter,
-    pizzaheadKO,
-    follow,
-    unknown300,
-    unknown301,
-    unknown302,
-    unknown303,
-    unknown304,
-    machcancelstart,
-    machcancel
-}

@@ -1,20 +1,20 @@
 event_inherited()
 image_speed = 0.35
-sprite_index = (global.mod_femgerome == 1) ? choose(spr_femgerome_idle1, spr_femgerome_idle2, spr_femgerome_idle3) : choose(spr_gerome_idle1, spr_gerome_idle2, spr_gerome_idle3)
+sprite_index = (global.mod_femgerome == 1 ? choose(spr_femgerome_idle1, spr_femgerome_idle2, spr_femgerome_idle3) : choose(spr_gerome_idle1, spr_gerome_idle2, spr_gerome_idle3))
 image_xscale = 1
-grabbed = false
+grabbed = 0
 hsp = 0
 vsp = 0
 grav = 0.5
-flash = true
-unpickable = false
+flash = 1
+unpickable = 0
 hp = 0
-grounded = true
-state = 0
+grounded = 1
+state = (0 << 0)
 playerid = obj_player1
 mask_index = spr_player_mask
 depth = -5
-platformid = -4
+platformid = noone
 hsp_carry = 0
 vsp_carry = 0
-thrown = false
+thrown = 0
