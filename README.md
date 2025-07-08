@@ -7,7 +7,7 @@
 
 ###DUE TO MAJOR CHANGES TO UNDERTALEMODTOOL YOU MAY ENCOUNTER ISSUES WITH SCRIPTS, IMPORTING PROCESS WORKS BEST WITH v0.5.5 OF UTMTCE https://gamebanana.com/tools/14193
 
-in short, first import sprites using .CSX script included in the repository (you mostly wanna set special value to 3, speed to 1, speed type to frames per game frame, and offset to center), fix sprite offsets as they're not perfect (best you can do is compare to already modded data.win)
+in short, first import sprites using .CSX script included in the repository (you mostly wanna set special value to 3, speed to 1, speed type to frames per game frame, and offset to center), fix sprite offsets and animation speeds as they're not perfect (best you can do is use SpriteOriginCopy.csx script in the repository and use already modded data.win as a donor, or manually correct offsets and speeds by comparing to already modded data.win)
 
 For unknown reason, sprites in "desertgroup" folder will make UTMT freeze when imported with ImportGraphicsWithParameters_v2.3 script, so for that use regular ImportGraphics script.
 
